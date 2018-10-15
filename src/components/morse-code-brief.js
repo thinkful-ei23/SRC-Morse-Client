@@ -1,4 +1,5 @@
 import React from 'react';
+import StudyGuide from './study-morse';
 
 export default class FAQ extends React.Component {
 	constructor(props) {
@@ -14,6 +15,9 @@ export default class FAQ extends React.Component {
 	}
 
 	render() {
+		if (this.state.study == true) {
+			return <StudyGuide />;
+		}
 		return (
 			<div className="FAQ">
 				<h2>What is Morse Code?</h2>

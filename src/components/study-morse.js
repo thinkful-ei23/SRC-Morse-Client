@@ -1,7 +1,7 @@
 import React from 'react';
 import Morse from '../images/morse.png';
 
-export default function() {
+export default function StudyGuide() {
 	return (
 		<div className="study-guide">
 			<img
