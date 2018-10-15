@@ -12,7 +12,7 @@ import { Field, reduxForm, focus } from 'redux-form';
 //import { addRack } from '../actions/protected-data';
 import './qa-form.css';
 
-class qa extends Component {
+export class Qa extends Component{
 	  //onSubmit(values) {
     //return this.props.dispatch(addRack( values.latitude, values.longitude));
   //}
@@ -60,6 +60,6 @@ export default reduxForm({
   form: 'answer',
   onSubmitFail: (errors, dispatch) => dispatch(focus('answer'))
 
-})(qa);
+})(Qa);
 
 

@@ -12,7 +12,7 @@ import { Field, reduxForm, focus } from 'redux-form';
 //import { addRack } from '../actions/protected-data';
 import './history.css';
 
-class history extends Component {
+export class History extends Component {
 	  //onSubmit(values) {
     //return this.props.dispatch(addRack( values.latitude, values.longitude));
   //}
@@ -43,11 +43,7 @@ class history extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <div className = "qa-form">
-	    <div>[pH] Question Display</div>
-	    <input type = 'text' className = "input new-line-and-margin" autofocus cols = '38' rows = '1' /*onChange={this.handleAnswer} value={this.state.answer}*//>
-            <button type="submit" className = 'new-line-and-margin qa-button'>
-              Submit Answer
-            </button>
+	    <div>[pH] History Display</div>
           
 	  </div>
         </form>
@@ -60,7 +56,7 @@ export default reduxForm({
   form: 'answer',
   onSubmitFail: (errors, dispatch) => dispatch(focus('answer'))
 
-})(history);
+})(History);
 
 
 
