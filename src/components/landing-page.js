@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
 import LoginForm from './login-form';
+import history from './history';
+import './landing-page.css'
 
 import './landing-page.css';
 
@@ -15,9 +17,9 @@ export function LandingPage(props) {
 	return (
 		<div className="home">
 			<div className="login-form">
-				<h2>Welcome to Foo App</h2>
+				<h2>Welcome Morse learner</h2>
 				<LoginForm />
-				{/* <Link to="/register">Register</Link> */}
+				{<Link to="/register">Register</Link>}
 			</div>
 			<div className="intro">
 				<h3>Do you wanna be a spy? Well, do ya, PUNK?</h3>
