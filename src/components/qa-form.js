@@ -11,7 +11,6 @@ import { Field, reduxForm, focus } from 'redux-form';
 import Input from './input';
 //import { addRack } from '../actions/protected-data';
 import './qa-form.css';
-import { getAnswer } from '../actions/answers-feedback';
 
 export class Qa extends Component {
 	//onSubmit(values) {
@@ -30,9 +29,6 @@ export class Qa extends Component {
 
 	onSubmit(values) {
 		console.log(values);
-
-		this.props.dispatch(getAnswer(values.answer));
-		console.log(this.state);
 
 		// e.preventDefault();
 		//this.props.addDestination(this.state);

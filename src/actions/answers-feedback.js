@@ -1,6 +1,5 @@
-export const COMPARE_ANSWER = 'COMPARE_ANSWER';
-export const getAnswer = (question = this.state.question, answer) => ({
-	type: COMPARE_ANSWER,
-	question,
+export const GET_ANSWER = 'GET_ANSWER';
+export const getAnswer = answer => ({
+	type: GET_ANSWER,
 	answer
 });

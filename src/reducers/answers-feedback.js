@@ -1,15 +1,16 @@
-import { COMPARE_ANSWER } from '../actions/answers-feedback';
+import { GET_ANSWER } from '../actions/answers-feedback';
 
 const initialState = {
-	question: { '...': 's' }
+	answer: ''
 };
 
 export default function ansReducer(state = initialState, action) {
 	console.log(action.answer);
-	if (action.type === COMPARE_ANSWER) {
-		if (action.answer === state.question) {
-			return 'Correct!';
-		}
+	if (action.type === GET_ANSWER) {
+		return Object.assign({}, state, {
+			answer: action.answer
+		});
+	} else {
+		return state;
 	}
-	return state;
 }
