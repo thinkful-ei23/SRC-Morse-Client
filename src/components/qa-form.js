@@ -72,16 +72,6 @@ export class Qa extends Component {
 	}
 }
 
-Qa = connect()(Qa);
-
-function mapStateToProps(state) {
-	console.log(this.state);
-	return {
-		answers: state.answers.answers
-	};
-}
-export const ConnectedAnswers = connect(mapStateToProps)(Qa);
-
 export default reduxForm({
 	form: 'answer',
 	onSubmitFail: (errors, dispatch) => dispatch(focus('answer'))

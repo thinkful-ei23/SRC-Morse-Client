@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import thunk from 'redux-thunk';
 import { loadAuthToken } from './local-storage';
@@ -7,6 +7,8 @@ import protectedDataReducer from './reducers/protected-data';
 import ansReducer from './reducers/answers-feedback';
 import { setAuthToken, refreshAuthToken } from './actions/auth';
 
+const composeEnhancers =
+	window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ || compose;
 const store = createStore(
 	combineReducers({
 		form: formReducer,
@@ -14,7 +16,7 @@ const store = createStore(
 		protectedData: protectedDataReducer,
 		answer: ansReducer
 	}),
-	applyMiddleware(thunk)
+	composeEnhancers(applyMiddleware(thunk))
 );
 
 // Hydrate the authToken from localStorage if it exist
