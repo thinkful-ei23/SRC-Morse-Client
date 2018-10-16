@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 import LoginForm from './login-form';
 import history from './history';
-import './landing-page.css'
+import './landing-page.css';
 
 import './landing-page.css';
 
