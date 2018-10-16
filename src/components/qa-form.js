@@ -9,6 +9,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, focus } from 'redux-form';
 import Input from './input';
+import Answers from './answer-feedback';
 //import { addRack } from '../actions/protected-data';
 import './qa-form.css';
 
@@ -29,7 +30,8 @@ export class Qa extends Component {
 
 	onSubmit(values) {
 		console.log(values);
-
+		let answer = values.answer;
+		return answer;
 		// e.preventDefault();
 		//this.props.addDestination(this.state);
 		//this.setState({
@@ -63,6 +65,7 @@ export class Qa extends Component {
 						Submit Answer
 					</button>
 				</form>
+				<Answers />
 			</div>
 		);
 	}
