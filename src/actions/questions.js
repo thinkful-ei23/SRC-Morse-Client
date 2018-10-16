@@ -12,8 +12,19 @@ fetchQuestionsSuccess = (question) => ({ type: FETCH_QUESTIONS_SUCCESS, question
 export const FETCH_QUESTIONS_ERROR = 'FETCH_QUESTIONS_ERROR';
 export const fetchQuestionsError = (error) => ({ type: FETCH_QUESTIONS_ERROR }, error)
 
-export fetchQuestions = () => (dispatch) => {
+export const fetchQuestions = () => (dispatch, getState) => {
   dispatch(fetchQuestionsRequest());
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/questions`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+  .then(res => normalizeResponseErrors(res))
+  .then(res => res.json())
+  .then(question => dispatch(fetchQuestionsSuccess(question)))
+  .catch(err => dispatch(fetchQuestionsError(err)));
 }
 
 // will have a post sync and async
