@@ -17,15 +17,15 @@ h1 {
 	width: auto;
 }
 
-button {
+/* button {
 	width: 50px;
-}
+} */
 
 .intro {
 	justify-content: center;
 	/* background: rgb(235, 235, 235); */
 	width: 350px;
-  
+}
 /* .inline-block{
 	display: inline-block;
 } */
