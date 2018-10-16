@@ -1,25 +1,28 @@
 import React from 'react';
 import { getAnswer } from '../actions/answers-feedback';
+import { connect } from 'react-redux';
 
-export default class Answers extends React.Component {
-	// componentDidMount() {
-	// 	this.props.dispatch(getAnswer(answer));
-	// }
+export class Answers extends React.Component {
+	componentDidMount() {
+		this.props.dispatch(getAnswer(this.props.value));
+	}
 
 	render() {
 		//if answer matches question key-value pair, answer is correct
 		//else, answer is incorrect
+		//currently hardcoded, needs to be fixed after 'mapStateToProps' working
 		return <div className="answer-feedback">Your answer is:</div>;
 	}
 }
 
-// Answers = connect()(Answer);
+Answers = connect()(Answers);
 
-// function mapStateToProps(state) {
-// 	console.log('mapstatetoprops');
-// 	return {
-// 		answers: state.answers.answers
-// 	};
-// }
-// export const ConnectedAnswer = connect(mapStateToProps)(Answers);
-// export default ConnectedAnswer;
+function mapStateToProps(state) {
+	console.log('mapstatetoprops');
+	console.log(state.answers);
+	return {
+		answers: state.answers
+	};
+}
+const ConnectedAnswer = connect(mapStateToProps)(Answers);
+export default ConnectedAnswer;

@@ -6,7 +6,6 @@
 */
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Field, reduxForm, focus } from 'redux-form';
 import Input from './input';
 import Answers from './answer-feedback';
@@ -14,6 +13,12 @@ import Answers from './answer-feedback';
 import './qa-form.css';
 
 export class Qa extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			answer: ''
+		};
+	}
 	//onSubmit(values) {
 	//return this.props.dispatch(addRack( values.latitude, values.longitude));
 	//}
@@ -27,11 +32,9 @@ export class Qa extends Component {
 	//answer: e.target.value
 	//})
 	//}
-
 	onSubmit(values) {
-		console.log(values);
-		let answer = values.answer;
-		return answer;
+		// console.log(values.answer);
+		this.setState({ answer: values.answer });
 		// e.preventDefault();
 		//this.props.addDestination(this.state);
 		//this.setState({
@@ -40,6 +43,7 @@ export class Qa extends Component {
 	}
 
 	render() {
+		// console.log('value is', this.state.answer);
 		return (
 			<div className="qa-form">
 				<div>[pH] Question Display</div>
@@ -65,7 +69,7 @@ export class Qa extends Component {
 						Submit Answer
 					</button>
 				</form>
-				<Answers />
+				<Answers value={this.state.answer} />
 			</div>
 		);
 	}
