@@ -10,7 +10,7 @@ export default class FAQ extends React.Component {
 		};
 	}
 
-	studyClick() {
+	studyClick(e) {
 		this.setState({ study: true });
 	}
 
@@ -28,7 +28,9 @@ export default class FAQ extends React.Component {
 				<p>
 					<b>Feel like learning some morse code?</b>
 				</p>
-				<button onClick={this.studyClick}>Yes! I want to be a spy!</button>
+				<button onClick={e => this.studyClick(e)}>
+					Yes! I want to be a spy!
+				</button>
 			</div>
 		);
 	}
