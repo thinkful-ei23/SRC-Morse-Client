@@ -19,7 +19,6 @@ export function LandingPage(props) {
 			<div className="login-form">
 				<h2>Welcome Morse learner</h2>
 				<LoginForm />
-				{<Link to="/register">Register</Link>}
 			</div>
 			<div className="intro">
 				<h3>Do you wanna be a spy? Well, do ya, PUNK?</h3>
