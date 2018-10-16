@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 
 export class Answers extends React.Component {
 	componentDidMount() {
-		this.props.dispatch(getAnswer(this.props.value));
+		console.log('component did mount', this.value);
+		// this.props.dispatch(getAnswer(this.value));
 	}
 
 	render() {
@@ -19,7 +20,7 @@ Answers = connect()(Answers);
 
 function mapStateToProps(state) {
 	console.log('mapstatetoprops');
-	console.log(state.answers);
+	// console.log(this.props.state);
 	return {
 		answers: state.answers
 	};

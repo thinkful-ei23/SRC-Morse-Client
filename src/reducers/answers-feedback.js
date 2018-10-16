@@ -5,7 +5,7 @@ const initialState = {
 };
 
 export default function ansReducer(state = initialState, action) {
-	console.log(action.answer);
+	console.log('reducer log', action.answer);
 	if (action.type === GET_ANSWER) {
 		return Object.assign({}, state, {
 			answer: action.answer

@@ -43,7 +43,7 @@ export class Qa extends Component {
 	}
 
 	render() {
-		// console.log('value is', this.state.answer);
+		console.log('value is', this.state.answer);
 		return (
 			<div className="qa-form">
 				<div>[pH] Question Display</div>
