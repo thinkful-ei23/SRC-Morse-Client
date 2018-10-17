@@ -7,18 +7,14 @@
 
 import React, { Component } from 'react';
 import { Field, reduxForm, focus } from 'redux-form';
-import Input from './input';
 import Answers from './answer-feedback';
+import { connect } from 'react-redux';
+import { getAnswer } from '../actions/answers-feedback';
+
 //import { addRack } from '../actions/protected-data';
 import './qa-form.css';
 
 export class Qa extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			answer: ''
-		};
-	}
 	//onSubmit(values) {
 	//return this.props.dispatch(addRack( values.latitude, values.longitude));
 	//}
@@ -32,9 +28,10 @@ export class Qa extends Component {
 	//answer: e.target.value
 	//})
 	//}
-	onSubmit(values) {
-		// console.log(values.answer);
-		this.setState({ answer: values.answer });
+	onSubmit(e) {
+		e.preventDefault();
+		console.log(e.target.value);
+		// this.setState({ answer: values.answer });
 		// e.preventDefault();
 		//this.props.addDestination(this.state);
 		//this.setState({
@@ -43,39 +40,34 @@ export class Qa extends Component {
 	}
 
 	render() {
-		console.log('value is', this.state.answer);
 		return (
 			<div className="qa-form">
 				<div>[pH] Question Display</div>
-				<form
-					onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
-				>
-					<Field
-						label="My answer is: "
-						name="answer"
-						id="answer"
-						component={Input}
-						type="text"
-						className="input new-line-and-margin"
-						autoFocus
-						cols="38"
-						rows="1" /*onChange={this.handleAnswer} value={this.state.answer}*/
-					/>
-					<button
+				<form onSubmit={e => this.onSubmit(e)}>
+					<label>
+						My answer is:
+						<input type="text" name="answer" />
+					</label>
+					<input
 						type="submit"
-						className="new-line-and-margin qa-button"
+						value="Submit Answer"
 						disabled={this.pristine || this.submitting}
-					>
-						Submit Answer
-					</button>
+					/>
 				</form>
-				<Answers value={this.state.answer} />
+				<Answers />
 			</div>
 		);
 	}
 }
 
-export default reduxForm({
-	form: 'answer',
-	onSubmitFail: (errors, dispatch) => dispatch(focus('answer'))
-})(Qa);
+Qa = connect()(Qa);
+
+function mapStateToProps(state) {
+	console.log('mapstatetoprops');
+	// console.log(this.props.state);
+	return {
+		answers: state.answers
+	};
+}
+const ConnectedAnswer = connect(mapStateToProps)(Qa);
+export default ConnectedAnswer;
