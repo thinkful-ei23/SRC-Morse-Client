@@ -74,7 +74,6 @@ Qa = connect()(Qa);
 
 function mapStateToProps(state) {
 	console.log('mapstatetoprops', state.answer);
-	// console.log(this.props.state);
 	return {
 		answer: state.answer.answer
 	};
