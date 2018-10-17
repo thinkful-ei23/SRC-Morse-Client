@@ -6,69 +6,78 @@
 */
 
 import React, { Component } from 'react';
+// import Answers from './answer-feedback';
 import { connect } from 'react-redux';
-import { Field, reduxForm, focus } from 'redux-form';
-import Input from './input';
+import { Formik } from 'formik';
 //import { addRack } from '../actions/protected-data';
 import './qa-form.css';
+import { getAnswer } from '../actions/answers-feedback';
 
 export class Qa extends Component {
-	//onSubmit(values) {
-	//return this.props.dispatch(addRack( values.latitude, values.longitude));
-	//}
-
-	//state = {
-	//latitude: null, longitude: null
-	//}
-
-	//handleAnswer = (e) => {
-	//this.setState({
-	//answer: e.target.value
-	//})
-	//}
-
-	onSubmit(values) {
-		console.log(values);
-
-		// e.preventDefault();
-		//this.props.addDestination(this.state);
-		//this.setState({
-		//  answer: ''
-		//})
+	handleSubmit(values) {
+		console.log(values.answer);
+		let answer = values.answer;
+		this.props.dispatch(getAnswer(answer));
+		// this.props.dispatch(getAnswer(values.answer));
 	}
 
 	render() {
+		// console.log('value is', this.state.answer);
 		return (
 			<div className="qa-form">
 				<div>[pH] Question Display</div>
-				<form
-					onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
+				<Formik
+					initialValues={{ answer: '' }}
+					validate={values => {
+						let errors = {};
+						if (!values.answer) {
+							errors.answer = 'Required';
+						}
+						return errors;
+					}}
+					onSubmit={(values, { setSubmitting }) => {
+						setTimeout(() => {
+							this.handleSubmit(values);
+							setSubmitting(false);
+						}, 100);
+					}}
 				>
-					<Field
-						label="My answer is: "
-						name="answer"
-						id="answer"
-						component={Input}
-						type="text"
-						className="input new-line-and-margin"
-						autoFocus
-						cols="38"
-						rows="1" /*onChange={this.handleAnswer} value={this.state.answer}*/
-					/>
-					<button
-						type="submit"
-						className="new-line-and-margin qa-button"
-						disabled={this.pristine || this.submitting}
-					>
-						Submit Answer
-					</button>
-				</form>
+					{({
+						values,
+						handleChange,
+						handleBlur,
+						handleSubmit,
+						isSubmitting
+						/* and other goodies */
+					}) => (
+						<form onSubmit={handleSubmit}>
+							<input
+								type="answer"
+								name="answer"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								value={values.email}
+							/>
+							<button type="submit" disabled={isSubmitting}>
+								Submit Answer
+							</button>
+						</form>
+					)}
+				</Formik>
+				{/* <Answers /> */}
 			</div>
 		);
 	}
 }
 
-export default reduxForm({
-	form: 'answer',
-	onSubmitFail: (errors, dispatch) => dispatch(focus('answer'))
-})(Qa);
+Qa = connect()(Qa);
+
+function mapStateToProps(state) {
+	console.log('mapstatetoprops', state.answer);
+	return {
+		answer: state.answer.answer
+	};
+}
+
+const ConnectedAnswer = connect(mapStateToProps)(Qa);
+export default ConnectedAnswer;
