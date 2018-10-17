@@ -6,11 +6,9 @@
 */
 
 import React, { Component } from 'react';
-import { Field, reduxForm, focus } from 'redux-form';
-import Answers from './answer-feedback';
+// import Answers from './answer-feedback';
 import { connect } from 'react-redux';
-import { getAnswer } from '../actions/answers-feedback';
-
+import { Formik } from 'formik';
 //import { addRack } from '../actions/protected-data';
 import './qa-form.css';
 
@@ -28,33 +26,61 @@ export class Qa extends Component {
 	//answer: e.target.value
 	//})
 	//}
-	onSubmit(e) {
-		e.preventDefault();
-		console.log(e.target.value);
-		// this.setState({ answer: values.answer });
-		// e.preventDefault();
-		//this.props.addDestination(this.state);
-		//this.setState({
-		//  answer: ''
-		//})
+	handleSubmit(values) {
+		console.log(values);
 	}
 
+	// onSubmit(e) {
+	// 	e.preventDefault();
+	// 	console.log(e.target.value);
+	// this.setState({ answer: values.answer });
+	// e.preventDefault();
+	//this.props.addDestination(this.state);
+	//this.setState({
+	//  answer: ''
+	//})
+
 	render() {
+		// console.log('value is', this.state.answer);
 		return (
 			<div className="qa-form">
 				<div>[pH] Question Display</div>
-				<form onSubmit={e => this.onSubmit(e)}>
-					<label>
-						My answer is:
-						<input type="text" name="answer" />
-					</label>
-					<input
-						type="submit"
-						value="Submit Answer"
-						disabled={this.pristine || this.submitting}
-					/>
-				</form>
-				<Answers />
+				<Formik
+					initialValues={{ answer: '' }}
+					validate={values => {
+						let errors = {};
+						if (!values.answer) {
+							errors.answer = 'Required';
+						}
+						return errors;
+					}}
+					onSubmit={values => this.handleSubmit(values)}
+				>
+					{({
+						values,
+						errors,
+						touched,
+						handleChange,
+						handleBlur,
+						handleSubmit,
+						isSubmitting
+						/* and other goodies */
+					}) => (
+						<form onSubmit={handleSubmit}>
+							<input
+								type="answer"
+								name="answer"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								value={values.email}
+							/>
+							<button type="submit" disabled={isSubmitting}>
+								Submit Answer
+							</button>
+						</form>
+					)}
+				</Formik>
+				{/* <Answers /> */}
 			</div>
 		);
 	}
