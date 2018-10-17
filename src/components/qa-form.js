@@ -36,7 +36,7 @@ export class Qa extends Component {
     /************************************ */
 		return (
 			<div className="qa-form">
-        <label>What word is this {askQuestion}</label>
+        <label>What is the word for this {askQuestion}</label>
 				<Formik
 					initialValues={{ answer: '' }}
 					validate={values => {
