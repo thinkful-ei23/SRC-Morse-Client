@@ -1,7 +1,6 @@
-
 // Attempt to add question in its own component
 
-// import React from 'react'; 
+// import React from 'react';
 
 // import { connect } from "react-redux";
 // import { fetchQuestions } from "../actions/questions";
@@ -28,11 +27,11 @@
 
 // }
 
-const mapStateToProps = (state, props) => {
-  console.log('in mapstatetoprops', state, props);
-  return {
-    questions: state.question.question
-  };
-};
+// const mapStateToProps = (state, props) => {
+//   console.log('in mapstatetoprops', state, props);
+//   return {
+//     questions: state.question.question
+//   };
+// };
 
-export default connect(mapStateToProps)(DisplayQuestions);
+// export default connect(mapStateToProps)(DisplayQuestions);

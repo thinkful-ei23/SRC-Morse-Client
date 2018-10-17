@@ -6,37 +6,52 @@
 */
 
 import React, { Component } from 'react';
-// import Answers from './answer-feedback';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 //import { addRack } from '../actions/protected-data';
 import './qa-form.css';
-import { getAnswer } from '../actions/answers-feedback';
+import Next from './next-button';
+import { getAnswer, compareAnswer } from '../actions/answers-feedback';
 // import { DisplayQuestions } from './display-question'; tried to put question in its own component
 
 export class Qa extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			// answer: ''
+			feedback: ''
+		};
+	}
+
+	handleNext(e) {
+		console.log('Next');
+	}
 
 	handleSubmit(values) {
-		console.log(values.answer);
-		let answer = values.answer;
-    this.props.dispatch(getAnswer(answer));
-		// this.props.dispatch(getAnswer(values.answer));
+		/* --this would put the input into the State to be passed to child component: Answer Feedback
+			-- This does not work yet, try again later
+		this.setState({
+		 	answer: values.answer
+		 });
+			*/
+		// console.log(values.answer);
+		if (values.answer === 'answer') {
+			console.log('correct');
+			this.setState({
+				feedback: `Yay! Keep at it! You'll be a spy in no time!`
+			});
+		} else {
+			console.log('incorrect');
+			this.setState({
+				feedback: `You might want to think about never going near cryptography...`
+			});
+		}
 	}
 
 	render() {
-    // console.log('value is', this.state.answer);
-    /**********Used to add questions********** */
-    const questionObject = this.props.questions;
-    if (!questionObject) {
-      return <div>loading...</div>
-    }
-    // console.log(questionObject)
-    const askQuestion = Object.keys(questionObject[0])[0]
-    // console.log(`What word is this ${Object.keys(questionObject[0])[0]}?`);
-    /************************************ */
 		return (
 			<div className="qa-form">
-        <label>What is the word for this {askQuestion}</label>
+				<label>Some morse code goes here.</label>
 				<Formik
 					initialValues={{ answer: '' }}
 					validate={values => {
@@ -46,19 +61,23 @@ export class Qa extends Component {
 						}
 						return errors;
 					}}
-					onSubmit={(values, { setSubmitting }) => {
+					onSubmit={(values, { setSubmitting, resetForm }) => {
 						setTimeout(() => {
 							this.handleSubmit(values);
 							setSubmitting(false);
-						}, 100);
+							resetForm();
+						}, 10);
 					}}
 				>
 					{({
 						values,
+						errors,
+						touched,
 						handleChange,
 						handleBlur,
 						handleSubmit,
-						isSubmitting
+						isSubmitting,
+						resetForm
 						/* and other goodies */
 					}) => (
 						<form onSubmit={handleSubmit}>
@@ -67,15 +86,18 @@ export class Qa extends Component {
 								name="answer"
 								onChange={handleChange}
 								onBlur={handleBlur}
-								value={values.email}
+								value={values.answer || ''}
 							/>
+							{errors.answer && touched.answer && errors.answer}
 							<button type="submit" disabled={isSubmitting}>
 								Submit Answer
 							</button>
 						</form>
 					)}
 				</Formik>
-				{/* <Answers /> */}
+				{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
+				<Next onClick={e => this.handleNext(e)} />
+				<div className="answer-feedback">{this.state.feedback}</div>
 			</div>
 		);
 	}
@@ -84,11 +106,11 @@ export class Qa extends Component {
 Qa = connect()(Qa);
 
 function mapStateToProps(state) {
-	console.log('mapstatetoprops', state);
-	console.log('mapstatetoprops', state.answer);
 	return {
-    answer: state.answer.answer,
-    questions: state.question.question
+		// answer: state.answer.answer,
+		// correct: state.answer.correct,
+		// incorrect: state.answer.incorrect
+		// questions: state.question.question
 	};
 }
 
