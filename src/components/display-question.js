@@ -1,36 +1,38 @@
-import React from 'react'; 
 
-import { connect } from "react-redux";
-import { fetchQuestions } from "../actions/questions";
-import requiresLogin from "./requires-login";
+// Attempt to add question in its own component
 
-export class DisplayQuestions extends React.Component {
+// import React from 'react'; 
 
-  componentDidMount() {
-    console.log('componentdidMount');
-    this.props.dispatch(fetchQuestions());
-  }
+// import { connect } from "react-redux";
+// import { fetchQuestions } from "../actions/questions";
+// import requiresLogin from "./requires-login";
 
-  render() {
-    const questionObject = this.props.questions;
-    if(!questionObject) {
-      return <div>loading...</div>
-    }
-    // console.log(questionObject)
-    const askQuestion = Object.keys(questionObject[0])[0]
-    // console.log(`What word is this ${Object.keys(questionObject[0])[0]}?`);
-    return (
-        <label>What word is this {askQuestion}</label>
-    );
-  }
+// export class DisplayQuestions extends React.Component {
+//   componentDidMount() {
+//     console.log('componentdidMount');
+//     this.props.dispatch(fetchQuestions());
+//   }
 
-}
+//   render() {
+//     const questionObject = this.props.questions;
+//     if(!questionObject) {
+//       return <div>loading...</div>
+//     }
+//     // console.log(questionObject)
+//     const askQuestion = Object.keys(questionObject[0])[0]
+//     // console.log(`What word is this ${Object.keys(questionObject[0])[0]}?`);
+//     return (
+//         <label>What word is this {askQuestion}</label>
+//     );
+//   }
+
+// }
 
 const mapStateToProps = (state, props) => {
-  console.log('in mapstatetoprops', state);
+  console.log('in mapstatetoprops', state, props);
   return {
     questions: state.question.question
   };
 };
 
-export default requiresLogin()(connect(mapStateToProps)(DisplayQuestions));
+export default connect(mapStateToProps)(DisplayQuestions);

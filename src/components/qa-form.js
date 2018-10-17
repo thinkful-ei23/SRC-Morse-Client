@@ -5,46 +5,92 @@
 	-CSS formatting	
 */
 
-
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Field, reduxForm, focus } from 'redux-form';
+import React, { Component } from 'react';
+// import Answers from './answer-feedback';
+import { connect } from 'react-redux';
+import { Formik } from 'formik';
 //import { addRack } from '../actions/protected-data';
 import './qa-form.css';
-import DisplayQuestion from './display-question';
+import { getAnswer } from '../actions/answers-feedback';
+// import { DisplayQuestions } from './display-question'; tried to put question in its own component
 
-export class Qa extends Component{
+export class Qa extends Component {
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    //this.props.addDestination(this.state);
-    //this.setState({
-    //  answer: ''
-    //})
-  }
+	handleSubmit(values) {
+		console.log(values.answer);
+		let answer = values.answer;
+    this.props.dispatch(getAnswer(answer));
+		// this.props.dispatch(getAnswer(values.answer));
+	}
 
-  render(){    
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div className = "qa-form">
-	    <DisplayQuestion />
-	    <input type = 'text' className = "input new-line-and-margin" autofocus cols = '38' rows = '1' /*onChange={this.handleAnswer} value={this.state.answer}*//>
-            <button type="submit" className = 'new-line-and-margin qa-button'>
-              Submit Answer
-            </button>
-          
-	  </div>
-        </form>
-      </div>
-    )
-  }
+	render() {
+    // console.log('value is', this.state.answer);
+    /**********Used to add questions********** */
+    const questionObject = this.props.questions;
+    if (!questionObject) {
+      return <div>loading...</div>
+    }
+    // console.log(questionObject)
+    const askQuestion = Object.keys(questionObject[0])[0]
+    // console.log(`What word is this ${Object.keys(questionObject[0])[0]}?`);
+    /************************************ */
+		return (
+			<div className="qa-form">
+        <label>What word is this {askQuestion}</label>
+				<Formik
+					initialValues={{ answer: '' }}
+					validate={values => {
+						let errors = {};
+						if (!values.answer) {
+							errors.answer = 'Required';
+						}
+						return errors;
+					}}
+					onSubmit={(values, { setSubmitting }) => {
+						setTimeout(() => {
+							this.handleSubmit(values);
+							setSubmitting(false);
+						}, 100);
+					}}
+				>
+					{({
+						values,
+						handleChange,
+						handleBlur,
+						handleSubmit,
+						isSubmitting
+						/* and other goodies */
+					}) => (
+						<form onSubmit={handleSubmit}>
+							<input
+								type="answer"
+								name="answer"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								value={values.email}
+							/>
+							<button type="submit" disabled={isSubmitting}>
+								Submit Answer
+							</button>
+						</form>
+					)}
+				</Formik>
+				{/* <Answers /> */}
+			</div>
+		);
+	}
 }
 
-export default reduxForm({
-  form: 'answer',
-  onSubmitFail: (errors, dispatch) => dispatch(focus('answer'))
+Qa = connect()(Qa);
 
-})(Qa);
+function mapStateToProps(state) {
+	console.log('mapstatetoprops', state);
+	console.log('mapstatetoprops', state.answer);
+	return {
+    answer: state.answer.answer,
+    questions: state.question.question
+	};
+}
 
-
+const ConnectedAnswer = connect(mapStateToProps)(Qa);
+export default ConnectedAnswer;

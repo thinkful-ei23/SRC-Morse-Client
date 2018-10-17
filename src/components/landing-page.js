@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 import LoginForm from './login-form';
 import history from './history';
-import './landing-page.css'
+import './landing-page.css';
 
 export function LandingPage(props) {
 	// If we are logged in redirect straight to the user's dashboard
@@ -17,7 +17,6 @@ export function LandingPage(props) {
 			<div className="login-form">
 				<h2>Welcome Morse learner</h2>
 				<LoginForm />
-				{<Link to="/register">Register</Link>}
 			</div>
 			<div className="intro">
 				<h3>Do you wanna be a spy? Well, do ya, PUNK?</h3>
