@@ -1,7 +1,6 @@
-
 // Attempt to add question in its own component
 
-// import React from 'react'; 
+// import React from 'react';
 
 // import { connect } from "react-redux";
 // import { fetchQuestions } from "../actions/questions";
