@@ -26,17 +26,17 @@ export class Qa extends Component {
 	render() {
     // console.log('value is', this.state.answer);
     /**********Used to add questions********** */
-    const questionObject = this.props.questions;
-    if (!questionObject) {
-      return <div>loading...</div>
-    }
-    // console.log(questionObject)
-    const askQuestion = Object.keys(questionObject[0])[0]
+    // const questionObject = this.props.questions;
+    // if (!questionObject) {
+    //   return <div>loading...</div>
+    // }
+    // // console.log(questionObject)
+    // const askQuestion = Object.keys(questionObject[0])[0]
     // console.log(`What word is this ${Object.keys(questionObject[0])[0]}?`);
+		// <label>What is the word for this {askQuestion}</label>
     /************************************ */
 		return (
 			<div className="qa-form">
-        <label>What is the word for this {askQuestion}</label>
 				<Formik
 					initialValues={{ answer: '' }}
 					validate={values => {
