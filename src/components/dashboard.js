@@ -15,15 +15,9 @@ export class Dashboard extends React.Component {
     render() {
         return (
             <div className="dashboard">
-	        <Qa />
+                <div className="dashboard-name">Hello {this.props.name}</div>
+	            <Qa />
                 <History />
-		<div className="dashboard-username">
-                    Username: {this.props.username}
-                </div>
-                <div className="dashboard-name">Name: {this.props.name}</div>
-                <div className="dashboard-protected-data">
-                    Protected data: {this.props.protectedData}
-                </div>
             </div>
         );
     }

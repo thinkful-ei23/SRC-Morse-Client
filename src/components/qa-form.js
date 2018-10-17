@@ -11,24 +11,9 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, focus } from 'redux-form';
 //import { addRack } from '../actions/protected-data';
 import './qa-form.css';
+import DisplayQuestion from './display-question';
 
 export class Qa extends Component{
-	  //onSubmit(values) {
-    //return this.props.dispatch(addRack( values.latitude, values.longitude));
-  //}
-
-  //state = {
-   //latitude: null, longitude: null
-  //}
-
-
- //handleAnswer = (e) => {
-    //this.setState({
-      //answer: e.target.value
-    //})
-  //}
-
-
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -43,7 +28,7 @@ export class Qa extends Component{
       <div>
         <form onSubmit={this.handleSubmit}>
           <div className = "qa-form">
-	    <div>[pH] Question Display</div>
+	    <DisplayQuestion />
 	    <input type = 'text' className = "input new-line-and-margin" autofocus cols = '38' rows = '1' /*onChange={this.handleAnswer} value={this.state.answer}*//>
             <button type="submit" className = 'new-line-and-margin qa-button'>
               Submit Answer

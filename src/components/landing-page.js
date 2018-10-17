@@ -6,8 +6,6 @@ import LoginForm from './login-form';
 import history from './history';
 import './landing-page.css'
 
-import './landing-page.css';
-
 export function LandingPage(props) {
 	// If we are logged in redirect straight to the user's dashboard
 	if (props.loggedIn) {

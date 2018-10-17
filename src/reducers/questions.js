@@ -1,7 +1,7 @@
 import { FETCH_QUESTIONS_SUCCESS, FETCH_QUESTIONS_REQUEST, FETCH_QUESTIONS_ERROR } from "../actions/questions";
 
 const initialState = {
-  question: [],
+  question: null,
   loading: false,
   error: null
 };
@@ -24,5 +24,6 @@ export default function reducer(state = initialState, action) {
       error: action.error
     })
   }
+  return state;
 }
 
