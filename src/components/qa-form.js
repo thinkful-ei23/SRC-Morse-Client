@@ -19,7 +19,8 @@ export class Qa extends Component {
 		super(props);
 		this.state = {
 			// answer: ''
-			feedback: ''
+			feedback: '',
+			points: 0
 		};
 	}
 
@@ -38,12 +39,14 @@ export class Qa extends Component {
 		if (values.answer === 'answer') {
 			console.log('correct');
 			this.setState({
-				feedback: `Yay! Keep at it! You'll be a spy in no time!`
+				feedback: `Yay! Keep at it! You'll be a spy in no time!`,
+				points: this.state.points + 1
 			});
 		} else {
 			console.log('incorrect');
 			this.setState({
-				feedback: `You might want to think about never going near cryptography...`
+				feedback: `You might want to think about never going near cryptography...`,
+				points: this.state.points - 1
 			});
 		}
 	}
@@ -98,6 +101,7 @@ export class Qa extends Component {
 				{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
 				<Next onClick={e => this.handleNext(e)} />
 				<div className="answer-feedback">{this.state.feedback}</div>
+				<div className="points">You have {this.state.points} points!</div>
 			</div>
 		);
 	}
