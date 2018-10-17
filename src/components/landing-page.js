@@ -14,8 +14,8 @@ export function LandingPage(props) {
 
 	return (
 		<div className="home">
-			<div className="login-form">
-				<h2>Welcome Morse learner</h2>
+			<div className="login-form login-form-bg">
+				<h2>Welcome to Morse learner</h2>
 				<LoginForm />
 			</div>
 			<div className="intro">
