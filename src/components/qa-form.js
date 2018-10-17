@@ -11,34 +11,15 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 //import { addRack } from '../actions/protected-data';
 import './qa-form.css';
+import { getAnswer } from '../actions/answers-feedback';
 
 export class Qa extends Component {
-	//onSubmit(values) {
-	//return this.props.dispatch(addRack( values.latitude, values.longitude));
-	//}
-
-	//state = {
-	//latitude: null, longitude: null
-	//}
-
-	//handleAnswer = (e) => {
-	//this.setState({
-	//answer: e.target.value
-	//})
-	//}
 	handleSubmit(values) {
-		console.log(values);
+		console.log(values.answer);
+		let answer = values.answer;
+		this.props.dispatch(getAnswer(answer));
+		// this.props.dispatch(getAnswer(values.answer));
 	}
-
-	// onSubmit(e) {
-	// 	e.preventDefault();
-	// 	console.log(e.target.value);
-	// this.setState({ answer: values.answer });
-	// e.preventDefault();
-	//this.props.addDestination(this.state);
-	//this.setState({
-	//  answer: ''
-	//})
 
 	render() {
 		// console.log('value is', this.state.answer);
@@ -54,12 +35,15 @@ export class Qa extends Component {
 						}
 						return errors;
 					}}
-					onSubmit={values => this.handleSubmit(values)}
+					onSubmit={(values, { setSubmitting }) => {
+						setTimeout(() => {
+							this.handleSubmit(values);
+							setSubmitting(false);
+						}, 100);
+					}}
 				>
 					{({
 						values,
-						errors,
-						touched,
 						handleChange,
 						handleBlur,
 						handleSubmit,
@@ -89,11 +73,12 @@ export class Qa extends Component {
 Qa = connect()(Qa);
 
 function mapStateToProps(state) {
-	console.log('mapstatetoprops');
+	console.log('mapstatetoprops', state.answer);
 	// console.log(this.props.state);
 	return {
-		answers: state.answers
+		answer: state.answer.answer
 	};
 }
+
 const ConnectedAnswer = connect(mapStateToProps)(Qa);
 export default ConnectedAnswer;
