@@ -22,7 +22,7 @@ export class Qa extends Component {
 			// answer: ''
 			feedback: 'Total progress:',
 			correctCount: 0,
-			showProg: false;
+			showProg: false
 		};
 	}
 	componentDidMount() {
