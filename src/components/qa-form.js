@@ -46,7 +46,7 @@ export class Qa extends Component {
 			console.log('incorrect');
 			this.setState({
 				feedback: 'You might want to think about never going near cryptography... Total Progress: ',
-				totalCount: this.state.totalCount - 1
+				correctCount: this.state.correctCount - 1
 			});
 		}
 	}
