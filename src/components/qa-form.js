@@ -26,7 +26,7 @@ export class Qa extends Component {
 		};
 	}
 	componentDidMount() {
-		console.log('componentdidMount');
+		// console.log('componentdidMount');
 		this.props.dispatch(fetchQuestions());
 	}
 
@@ -48,7 +48,7 @@ export class Qa extends Component {
 		 });
 			*/
 		// console.log(values.answer);
-		if (values.answer === this.props.questions[0].answer.toLowerCase()) {
+		if (values.answer.toLowerCase() === this.props.questions[0].answer.toLowerCase()) {
 			console.log('correct');
 			this.setState({
 				feedback: 'Yay! Keep at it! You\'ll be a spy in no time! ',
@@ -68,7 +68,7 @@ export class Qa extends Component {
 		if (!questions) {
 			return <div>loading...</div>
 		}
-		console.log('question', questions[0].question);
+		// console.log('question', questions[0].question);
 		const question = questions[0].question;
 
 
@@ -190,7 +190,7 @@ export class Qa extends Component {
 Qa = connect()(Qa);
 
 function mapStateToProps(state) {
-	console.log('in mapstatetoprops', state);
+	// console.log('in mapstatetoprops', state);
 	return {
 		// answer: state.answer.answer,
 		// correct: state.answer.correct,
