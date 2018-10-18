@@ -180,6 +180,9 @@ export class Qa extends Component {
 				</Formik>
 				{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
 				<Next onClick={e => this.handleNext(e)} />
+								<div className="answer-feedback">{this.state.feedback}</div>
+
+
 				<button onClick={e => this.progButton(e)}>Show Progress</button>
 
 			</div>
