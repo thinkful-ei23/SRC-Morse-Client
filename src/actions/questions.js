@@ -24,22 +24,28 @@ export const fetchQuestions = () => (dispatch, getState) => {
 	return fetch(`${API_BASE_URL}/questions`, {
 		method: 'GET',
 		headers: {
+			'content-type': 'application/json',
 			Authorization: `Bearer ${authToken}`
 		}
 	})
 		.then(res => {
-			console.log(normalizeResponseErrors(res));
-			normalizeResponseErrors(res);
+			// console.log(res);
+			return normalizeResponseErrors(res);
 		})
 		.then(res => {
-			console.log(res.json);
-			res.json();
+			// console.log(res);
+			return res.json();
 		})
 		.then(question => dispatch(fetchQuestionsSuccess(question)))
 		.catch(err => {
-			console.log(err);
+			// console.log(err);
 			dispatch(fetchQuestionsError(err));
 		});
 };
 
 // will have a post sync and async
+
+// export const USER_INPUT_SUCCESS = 'USER_INPUT_SUCCESS';
+// export const userInputSuccess= userInput => ({
+
+// })

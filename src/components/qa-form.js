@@ -12,7 +12,8 @@ import { Formik } from 'formik';
 import './qa-form.css';
 import Next from './next-button';
 import { getAnswer, compareAnswer } from '../actions/answers-feedback';
-// import { DisplayQuestions } from './display-question'; tried to put question in its own component
+import DisplayQuestions from './display-question'; // tried to put question in its own component
+import { fetchQuestions } from "../actions/questions";
 
 export class Qa extends Component {
 	constructor(props) {
@@ -23,6 +24,10 @@ export class Qa extends Component {
 			correctCount: 0,
 			totalCount: 0
 		};
+	}
+	componentDidMount() {
+		console.log('componentdidMount');
+		this.props.dispatch(fetchQuestions());
 	}
 
 	handleNext(e) {
@@ -37,7 +42,7 @@ export class Qa extends Component {
 		 });
 			*/
 		// console.log(values.answer);
-		if (values.answer === 'answer') {
+		if (values.answer === this.props.questions[0].answer.toLowerCase()) {
 			console.log('correct');
 			this.setState({
 				feedback: 'Yay! Keep at it! You\'ll be a spy in no time! Total Progress: ',
@@ -54,9 +59,15 @@ export class Qa extends Component {
 	}
 
 	render() {
+		const questions = this.props.questions;
+		if (!questions) {
+			return <div>loading...</div>
+		}
+		console.log('question', questions[0].question);
+		const question = questions[0].question;
 		return (
 			<div className="qa-form">
-				<label>Some morse code goes here.</label>
+				<label>What is the word for {question}?</label>
 				<Formik
 					initialValues={{ answer: '' }}
 					validate={values => {
@@ -111,11 +122,12 @@ export class Qa extends Component {
 Qa = connect()(Qa);
 
 function mapStateToProps(state) {
+	console.log('in mapstatetoprops', state);
 	return {
 		// answer: state.answer.answer,
 		// correct: state.answer.correct,
 		// incorrect: state.answer.incorrect
-		// questions: state.question.question
+		questions: state.question.question
 	};
 }
 
