@@ -21,13 +21,20 @@ export class Qa extends Component {
 		this.state = {
 			// answer: ''
 			feedback: 'Total progress:',
-			correctCount: 0
+			correctCount: 0,
+			showProg: false;
 		};
 	}
 	componentDidMount() {
 		// console.log('componentdidMount');
 		this.props.dispatch(fetchQuestions());
 	}
+
+
+	progButton(e) {
+		this.setState({ showProg: true });
+	}
+   
 
 	handleNext(e) {
 		console.log('Next');
@@ -63,6 +70,63 @@ export class Qa extends Component {
 		}
 		// console.log('question', questions[0].question);
 		const question = questions[0].question;
+
+
+		if (this.state.showProg === true) {
+			return (
+				<div className="qa-form">
+					<label>What is the word for {question}?</label>
+					<Formik
+						initialValues={{ answer: '' }}
+						validate={values => {
+							let errors = {};
+							if (!values.answer) {
+								errors.answer = 'Required';
+							}
+							return errors;
+						}}
+						onSubmit={(values, { setSubmitting, resetForm }) => {
+							setTimeout(() => {
+								this.handleSubmit(values);
+								setSubmitting(false);
+								resetForm();
+							}, 10);
+						}}
+					>
+						{({
+							values,
+							errors,
+							touched,
+							handleChange,
+							handleBlur,
+							handleSubmit,
+							isSubmitting,
+							resetForm
+							/* and other goodies */
+						}) => (
+							<form onSubmit={handleSubmit}>
+								<input
+									type="answer"
+									name="answer"
+									onChange={handleChange}
+									onBlur={handleBlur}
+									value={values.answer || ''}
+								/>
+								{errors.answer && touched.answer && errors.answer}
+								<button type="submit" disabled={isSubmitting}>
+									Submit Answer
+								</button>
+							</form>
+						)}
+					</Formik>
+					{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
+					<Next onClick={e => this.handleNext(e)} />
+					<div className="answer-feedback">{this.state.feedback}{this.state.correctCount}</div>
+
+				</div>
+			);
+		}
+
 		return (
 			<div className="qa-form">
 				<label>What is the word for {question}?</label>
@@ -111,7 +175,8 @@ export class Qa extends Component {
 				</Formik>
 				{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
 				<Next onClick={e => this.handleNext(e)} />
-				<div className="answer-feedback">{this.state.feedback}{this.state.correctCount}</div>
+				<button onClick={e => this.props.progButton(e)}>Show Progress</button>
+
 			</div>
 		);
 	}
