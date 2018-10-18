@@ -39,7 +39,7 @@ export class Dashboard extends React.Component {
 				<div className="dashboard-name">Hello {this.props.name}</div>
 				<button onClick={e => this.onClick(e)}>FAQ</button>
 				<Qa />
-				<History />
+				{/* <History /> future feature */}
 			</div>
 		);
 	}
