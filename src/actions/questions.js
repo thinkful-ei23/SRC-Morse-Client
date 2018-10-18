@@ -19,7 +19,7 @@ export const fetchQuestionsError = error => (
 
 export const fetchQuestions = () => (dispatch, getState) => {
 	dispatch(fetchQuestionsRequest());
-	console.log('In fetch action');
+	// console.log('In fetch action');
 	const authToken = getState().auth.authToken;
 	return fetch(`${API_BASE_URL}/questions`, {
 		method: 'GET',
