@@ -13,7 +13,7 @@ import './qa-form.css';
 import Next from './next-button';
 import { getAnswer, compareAnswer } from '../actions/answers-feedback';
 import DisplayQuestions from './display-question'; // tried to put question in its own component
-import { fetchQuestions } from "../actions/questions";
+import { fetchQuestions, makeList } from '../actions/questions';
 
 export class Qa extends Component {
 	constructor(props) {
@@ -41,31 +41,43 @@ export class Qa extends Component {
 		 });
 			*/
 		// console.log(values.answer);
-		if (values.answer === this.props.questions[0].answer.toLowerCase()) {
+		const answer = this.props.questions;
+		// console.log(typeof answer.head.value.answer);
+		if (values.answer === answer.head.value.answer.toLowerCase()) {
 			console.log('correct');
 			this.setState({
-				feedback: 'Yay! Keep at it! You\'ll be a spy in no time! Total Progress: ',
-				correctCount: this.state.correctCount +1
+				feedback:
+					"Yay! Keep at it! You'll be a spy in no time! Total Progress: ",
+				correctCount: this.state.correctCount + 1
 			});
 		} else {
 			console.log('incorrect');
 			this.setState({
-				feedback: 'You might want to think about never going near cryptography... Total Progress: ',
+				feedback:
+					'You might want to think about never going near cryptography... Total Progress: ',
 				correctCount: this.state.correctCount - 1
 			});
 		}
 	}
 
 	render() {
+		// **THIS is the RESPONSE from call to mLab**
+		let display = '';
 		const questions = this.props.questions;
-		if (!questions) {
-			return <div>loading...</div>
+		if (questions) {
+			// console.log('linked list =', questions);
+			// console.log(questions.head.value.question);
+			display = questions.head.value.question;
 		}
-		console.log('question', questions[0].question);
-		const question = questions[0].question;
+		if (!questions) {
+			return <div>loading...</div>;
+		}
 		return (
 			<div className="qa-form">
-				<label>What is the word for {question}?</label>
+				<label>What is the word for {display}?</label>
+
+				{/* **THIS is where the INPUT for the answer starts** */}
+
 				<Formik
 					initialValues={{ answer: '' }}
 					validate={values => {
@@ -111,7 +123,10 @@ export class Qa extends Component {
 				</Formik>
 				{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
 				<Next onClick={e => this.handleNext(e)} />
-				<div className="answer-feedback">{this.state.feedback}{this.state.correctCount}</div>
+				<div className="answer-feedback">
+					{this.state.feedback}
+					{this.state.correctCount}
+				</div>
 			</div>
 		);
 	}
@@ -120,7 +135,7 @@ export class Qa extends Component {
 Qa = connect()(Qa);
 
 function mapStateToProps(state) {
-	console.log('in mapstatetoprops', state);
+	// console.log('in mapstatetoprops', state);
 	return {
 		// answer: state.answer.answer,
 		// correct: state.answer.correct,
