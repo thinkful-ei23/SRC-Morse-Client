@@ -5,7 +5,6 @@ export default class FAQ extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			faq: false,
 			study: false
 		};
 	}
@@ -14,9 +13,13 @@ export default class FAQ extends React.Component {
 		this.setState({ study: true });
 	}
 
+	onClick(e) {
+		this.setState({ study: false });
+	}
+
 	render() {
 		if (this.state.study == true) {
-			return <StudyGuide />;
+			return <StudyGuide onClick={e => this.onClick(e)} />;
 		}
 		return (
 			<div className="FAQ">
@@ -31,6 +34,7 @@ export default class FAQ extends React.Component {
 				<button onClick={e => this.studyClick(e)}>
 					Yes! I want to be a spy!
 				</button>
+				<button onClick={e => this.props.closeClick(e)}>Close</button>
 			</div>
 		);
 	}
