@@ -48,3 +48,31 @@ class LinkedList {
 		return currNode;
 	}
 }
+
+const QLL = new LinkedList();
+const array = ['q1', 'q2', 'q3'];
+
+function makeList(list, array) {
+	array.map(position => {
+		list.insertLast(position);
+	});
+	// console.log(list);
+	return list;
+}
+
+function Next(list) {
+	currNode = list.head;
+	nextNode = list.head.next;
+	// console.log('current node:', currNode);
+	// console.log('next question:', nextNode);
+	// console.log('third node:', nextNode.next);
+	// // let newNode = currNode;
+	currNode.next = nextNode.next;
+	nextNode.next = currNode;
+	list.head = nextNode;
+	console.log('nexted', list);
+	// console.log(currNode.next);
+}
+
+makeList(QLL, array);
+Next(QLL);
