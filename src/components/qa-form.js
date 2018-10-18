@@ -20,7 +20,7 @@ export class Qa extends Component {
 		super(props);
 		this.state = {
 			// answer: ''
-			feedback: 'Total progress:',
+			feedback: '',
 			correctCount: 0,
 			showProg: false
 		};
@@ -51,13 +51,13 @@ export class Qa extends Component {
 		if (values.answer === this.props.questions[0].answer.toLowerCase()) {
 			console.log('correct');
 			this.setState({
-				feedback: 'Yay! Keep at it! You\'ll be a spy in no time! Total Progress: ',
+				feedback: 'Yay! Keep at it! You\'ll be a spy in no time! ',
 				correctCount: this.state.correctCount +1
 			});
 		} else {
 			console.log('incorrect');
 			this.setState({
-				feedback: 'You might want to think about never going near cryptography... Total Progress: ',
+				feedback: 'You might want to think about never going near cryptography...',
 				correctCount: this.state.correctCount - 1
 			});
 		}
@@ -121,7 +121,12 @@ export class Qa extends Component {
 					</Formik>
 					{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
 					<Next onClick={e => this.handleNext(e)} />
-					<div className="answer-feedback">{this.state.feedback}{this.state.correctCount}</div>
+
+
+					<div className="answer-feedback">{this.state.feedback}</div>
+
+
+					<div className="answer-feedback">Correct Answers: {this.state.correctCount}</div>
 
 				</div>
 			);
