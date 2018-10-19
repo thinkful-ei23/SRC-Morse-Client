@@ -14,7 +14,7 @@ export function RegistrationPage(props) {
         <div className="reg-home">
             <h2>Learn Morse code</h2>
             <RegistrationForm />
-            <Link to="/">Login</Link>
+            <Link className="login-link" to="/">Login</Link>
         </div>
     );
 }
