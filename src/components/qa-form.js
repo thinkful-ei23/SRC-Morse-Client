@@ -48,7 +48,7 @@ export class Qa extends Component {
 			*/
 		// console.log(values.answer);
 		// console.log( answer.head.value.answer);
-		if (values.answer === this.props.questions[0].answer.toLowerCase()) {
+		if (values.answer.toLowerCase() === this.props.questions[0].answer.toLowerCase()) {
 			console.log('correct');
 			this.setState(
 				{
