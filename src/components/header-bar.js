@@ -46,7 +46,7 @@ export class HeaderBar extends React.Component {
 			<div className="header-bar">
 				<h1>Morse App</h1>
 				<div className = "header-panel">
-						<div className="dashboard-name">Hello {this.props.name}</div>:
+						<div className="dashboard-name">Hello {this.props.name}</div>
 				{logOutButton}
 				<button onClick={e => this.onClick(e)}>FAQ</button>
 				</div>
