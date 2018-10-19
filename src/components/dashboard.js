@@ -1,43 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
-import { fetchProtectedData } from '../actions/protected-data';
 import Qa from './qa-form';
-import FAQ from './morse-code-brief';
 import History from './history';
+import HeaderBar from './header-bar';
+
 import './dashboard.css';
 
-// import { fetchQuestions } from '../actions/questions';
-
 export class Dashboard extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			faq: false
-		};
-	}
-
-	onClick(e) {
-		console.log('faq clicked');
-		this.setState({
-			faq: true
-		});
-	}
-
-	closeClick(e) {
-		this.setState({
-			faq: false
-		});
-	}
-
 	render() {
-		if (this.state.faq) {
-			return <FAQ closeClick={e => this.closeClick(e)} />;
-		}
 		return (
 			<div className="dashboard">
+				<HeaderBar />
 				<div className="dashboard-name">Hello {this.props.name}</div>
-				<button onClick={e => this.onClick(e)}>FAQ</button>
 				<Qa />
 				{/* <History /> future feature */}
 			</div>
