@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { clearAuth } from '../actions/auth';
+import { save } from '../actions/logout';
 import { clearAuthToken } from '../local-storage';
 import { Redirect } from 'react-router-dom';
 import FAQ from './morse-code-brief';
@@ -28,9 +29,10 @@ export class HeaderBar extends React.Component {
 	}
 
 	logOut() {
-		alert('You have successfully logged out.');
-		this.props.dispatch(clearAuth());
-		clearAuthToken();
+		this.props.dispatch(save());
+		// alert('You have successfully logged out.');
+		// this.props.dispatch(clearAuth());
+		// clearAuthToken();
 	}
 
 	render() {

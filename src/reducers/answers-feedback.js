@@ -6,7 +6,7 @@ const initialState = {
 
 export default function ansReducer(state = initialState, action) {
 	if (action.type === CORRECT_ANSWER) {
-		console.log('reducer log:', action.state.length);
+		// console.log('reducer log:', action.state);
 		let M = action.state[0].memoryStrength * 2;
 		if (M > action.state.length) {
 			M = action.state.length - 1;
@@ -21,8 +21,12 @@ export default function ansReducer(state = initialState, action) {
 		// console.log('take away ansswered q:', action.state);
 		action.state.splice(M, 0, newState);
 		// console.log('add to M-th place', action.state);
+		let finalState = Object.assign({}, newState[newState.length], {
+			next: null
+		});
+		console.log(finalState);
 		return Object.assign({}, state, {
-			list: newState
+			list: finalState
 		});
 	}
 	if (action.type === INCORRECT_ANSWER) {
