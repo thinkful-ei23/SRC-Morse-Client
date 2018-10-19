@@ -145,7 +145,7 @@ export class Qa extends Component {
 
 		return (
 			<div className="qa-form">
-				<label>What is the word for {display}?</label>
+				<label className="big-bitch-text">What is the word for {display}?</label>
 
 				{/* **THIS is where the INPUT for the answer starts** */}
 
