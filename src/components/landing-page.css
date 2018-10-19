@@ -1,5 +1,5 @@
 .center{justify-content:center;}
-p{font: 12px/30px Georgia, serif;}
+p{font: 16px/30px Georgia, serif;}
 .home {
 	padding: 20px;
 	display: flex;
@@ -19,19 +19,32 @@ h1 {
 
 
 
-h2{text-align:center;
-font:Georgia, serif;
+h2{
+	text-align:center;
+	font:Georgia, serif;
+	font-size: 25px;
+}
+h3 {
+	font-size: 20px;
 }
 
 .login-form {
 	justify-content: center;
 	flex-direction: column;
 	padding: 5%;
+	font-size: 20px;
 	width: 20%;
 	height: 20%;
 	text-align: center;
 }
-
+.register-form {
+	justify-content: center;
+	flex-direction: column;
+	font-size: 20px;
+	width: 20%;
+	height: 20%;
+	text-align: center;
+}
 .intro{
 
 	text-align:center;
@@ -53,9 +66,6 @@ width: 90%;
 */
 }
 
-/* button {
-	width: 50px;
-} */
 
 .intro {
 	justify-content: center;
@@ -63,6 +73,9 @@ width: 90%;
 	width: 350px;
 }
 
-/* .inline-block{
-	display: inline-block;
-} */
+input {
+	font-size: 20px;
+	border: .4px black solid;
+	border-radius: 3px;
+	padding: 5px;
+}

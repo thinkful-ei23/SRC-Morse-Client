@@ -6,8 +6,8 @@ body {
   display: grid;
   background: url('./images/bg.png');
   grid-template: 100% / 100%;
-  font-size: 2vmin;
+  /* font-size: 2vmin; */
   background-color: #fcfcfc;
-  background-size: cover;
+  /* background-size: cover; */
   background-repeat: no-repeat;
 }
