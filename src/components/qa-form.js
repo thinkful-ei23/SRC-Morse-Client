@@ -56,7 +56,7 @@ export class Qa extends Component {
 			console.log('correct');
 			this.setState({
 				feedback:
-					"Yay! Keep at it! You'll be a spy in no time! Total Progress: ",
+					"Yay! Keep at it! You'll be a spy in no time! ",
 				correctCount: this.state.correctCount + 1
 			});
 			this.props.dispatch(correctAnswer(this.props.questions));
