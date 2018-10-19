@@ -11,9 +11,9 @@ import { Formik } from 'formik';
 //import { addRack } from '../actions/protected-data';
 import './qa-form.css';
 import Next from './next-button';
-import { getAnswer, compareAnswer } from '../actions/answers-feedback';
-import DisplayQuestions from './display-question'; // tried to put question in its own component
-import { fetchQuestions, makeList } from '../actions/questions';
+import { correctAnswer, incorrectAnswer } from '../actions/answers-feedback';
+// import DisplayQuestions from './display-question'; // tried to put question in its own component
+import { fetchQuestions } from '../actions/questions';
 
 export class Qa extends Component {
 	constructor(props) {
@@ -30,14 +30,13 @@ export class Qa extends Component {
 		this.props.dispatch(fetchQuestions());
 	}
 
-
 	progButton(e) {
 		this.setState({ showProg: true });
 	}
-   
 
 	handleNext(e) {
 		console.log('Next');
+		this.props.dispatch(incorrectAnswer(this.props.questions));
 	}
 
 	handleSubmit(values) {
@@ -48,21 +47,28 @@ export class Qa extends Component {
 		 });
 			*/
 		// console.log(values.answer);
-		const answer = this.props.questions;
-		// console.log(typeof answer.head.value.answer);
-		if (values.answer === answer.head.value.answer.toLowerCase()) {
+		// console.log( answer.head.value.answer);
+		if (values.answer === this.props.questions[0].answer.toLowerCase()) {
 			console.log('correct');
-			this.setState({
-				feedback:
-					"Yay! Keep at it! You'll be a spy in no time! Total Progress: ",
-				correctCount: this.state.correctCount + 1
-			});
+			this.setState(
+				{
+					feedback:
+						"Yay! Keep at it! You'll be a spy in no time! Total Progress: ",
+					correctCount: this.state.correctCount + 1
+				},
+				() => this.props.dispatch(correctAnswer(this.props.questions))
+			);
+			// console.log(this.props.questions)
 		} else {
 			console.log('incorrect');
-			this.setState({
-				feedback: 'You might want to think about never going near cryptography...',
-				correctCount: this.state.correctCount - 1
-			});
+			this.setState(
+				{
+					feedback:
+						'You might want to think about never going near cryptography...',
+					correctCount: this.state.correctCount - 1
+				},
+				() => this.props.dispatch(incorrectAnswer(this.props.questions))
+			);
 		}
 	}
 
@@ -71,9 +77,8 @@ export class Qa extends Component {
 		let display = '';
 		const questions = this.props.questions;
 		if (questions) {
-			// console.log('linked list =', questions);
-			// console.log(questions.head.value.question);
-			display = questions.head.value.question;
+			console.log('question', questions);
+			display = questions[0].question;
 		}
 		if (!questions) {
 			return <div>loading...</div>;
@@ -129,12 +134,11 @@ export class Qa extends Component {
 					{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
 					<Next onClick={e => this.handleNext(e)} />
 
-
 					<div className="answer-feedback">{this.state.feedback}</div>
 
-
-					<div className="answer-feedback">Correct Answers: {this.state.correctCount}</div>
-
+					<div className="answer-feedback">
+						Correct Answers: {this.state.correctCount}
+					</div>
 				</div>
 			);
 		}
@@ -190,7 +194,7 @@ export class Qa extends Component {
 				</Formik>
 				{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
 				<Next onClick={e => this.handleNext(e)} />
-								<div className="answer-feedback">{this.state.feedback}</div>
+				<div className="answer-feedback">{this.state.feedback}</div>
 				<button onClick={e => this.progButton(e)}>Show Progress</button>
 			</div>
 		);
@@ -202,10 +206,8 @@ Qa = connect()(Qa);
 function mapStateToProps(state) {
 	// console.log('in mapstatetoprops', state);
 	return {
-		// answer: state.answer.answer,
-		// correct: state.answer.correct,
-		// incorrect: state.answer.incorrect
-		questions: state.question.question
+		questions: state.question.question,
+		list: state.answer.list
 	};
 }
 

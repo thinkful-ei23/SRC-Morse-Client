@@ -18,13 +18,8 @@ export default function reducer(state = initialState, action) {
 			error: null
 		});
 	} else if (action.type === FETCH_QUESTIONS_SUCCESS) {
-		// console.log('action.question, success', action.question, action.list);
-		action.question.map(position => {
-			action.list.insertLast(position);
-		});
-		// console.log(action.list);
 		return Object.assign({}, state, {
-			question: action.list,
+			question: action.question,
 			error: null
 		});
 	} else if (action.type === FETCH_QUESTIONS_ERROR) {
