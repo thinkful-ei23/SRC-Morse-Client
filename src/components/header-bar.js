@@ -2,35 +2,58 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { clearAuth } from '../actions/auth';
 import { clearAuthToken } from '../local-storage';
+import { Redirect } from 'react-router-dom';
+import FAQ from './morse-code-brief';
+
 import './header-bar.css';
 
 export class HeaderBar extends React.Component {
-    logOut() 
-    {
-        alert('You have successfully logged out.');
-        this.props.dispatch(clearAuth());
-        clearAuthToken();
-    }
+	constructor(props) {
+		super(props);
+		this.state = {
+			faq: false
+		};
+	}
+	componentDidMount() {
+		this.setState({
+			faq: false
+		});
+	}
 
-    render() {
-        // Only render the log out button if we are logged in
-        let logOutButton;
-        if (this.props.loggedIn) {
-            logOutButton = (
-                <button onClick={() => this.logOut()}>Log out</button>
-            );
-        }
-        return (
-            <div className="header-bar">
-                <h1>Morse App</h1>
-                {logOutButton}
-            </div>
-        );
-    }
+	onClick(e) {
+		console.log('faq clicked');
+		this.setState({
+			faq: true
+		});
+	}
+
+	logOut() {
+		alert('You have successfully logged out.');
+		this.props.dispatch(clearAuth());
+		clearAuthToken();
+	}
+
+	render() {
+		if (this.state.faq) {
+			return <Redirect to="/faq" />;
+		}
+		// Only render the log out button if we are logged in
+		let logOutButton;
+		if (this.props.loggedIn) {
+			logOutButton = <button onClick={() => this.logOut()}>Log out</button>;
+		}
+		return (
+			<div className="header-bar">
+				<h1>Morse App</h1>
+				{logOutButton}
+				<button onClick={e => this.onClick(e)}>FAQ</button>
+			</div>
+		);
+	}
 }
 
 const mapStateToProps = state => ({
-    loggedIn: state.auth.currentUser !== null
+	loggedIn: state.auth.currentUser !== null
 });
 
 export default connect(mapStateToProps)(HeaderBar);
