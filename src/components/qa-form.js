@@ -22,7 +22,8 @@ export class Qa extends Component {
 			// answer: ''
 			feedback: '',
 			correctCount: 0,
-			showProg: false
+			showProg: false,
+			correctAnswer: false
 		};
 	}
 	componentDidMount() {
@@ -48,33 +49,41 @@ export class Qa extends Component {
 			*/
 		// console.log(values.answer);
 		// console.log( answer.head.value.answer);
-		if (values.answer.toLowerCase() === this.props.questions[0].answer.toLowerCase()) {
+		if (
+			values.answer.toLowerCase() ===
+			this.props.questions[0].answer.toLowerCase()
+		) {
 			console.log('correct');
-			this.setState(
-				{
-					feedback:
-						"Yay! Keep at it! You'll be a spy in no time! ",
-					correctCount: this.state.correctCount + 1
-				},
-				() => this.props.dispatch(correctAnswer(this.props.questions))
-			);
+			this.setState({
+				feedback:
+					"Yay! Keep at it! You'll be a spy in no time! Total Progress: ",
+				correctCount: this.state.correctCount + 1
+			});
+			this.props.dispatch(correctAnswer(this.props.questions));
 			// console.log(this.props.questions)
 		} else {
 			console.log('incorrect');
-			this.setState(
-				{
-					feedback:
-						'You might want to think about never going near cryptography...',
-					correctCount: this.state.correctCount - 1
-				},
-				() => this.props.dispatch(incorrectAnswer(this.props.questions))
-			);
+			this.setState({
+				feedback:
+					'You might want to think about never going near cryptography...',
+				correctAnswer: this.props.questions[0].answer,
+				correctCount: this.state.correctCount - 1
+			});
+			setTimeout(() => {
+				this.props.dispatch(incorrectAnswer(this.props.questions));
+			}, 3000);
+			setTimeout(() => {
+				this.setState({
+					correctAnswer: false
+				});
+			}, 3000);
 		}
 	}
 
 	render() {
 		// **THIS is the RESPONSE from call to mLab**
 		let display = '';
+		let correction = '';
 		const questions = this.props.questions;
 		if (questions) {
 			console.log('question', questions);
@@ -82,6 +91,9 @@ export class Qa extends Component {
 		}
 		if (!questions) {
 			return <div>loading...</div>;
+		}
+		if (this.state.correctAnswer) {
+			correction = `The correct answer is: ${this.state.correctAnswer}`;
 		}
 
 		if (this.state.showProg === true) {
@@ -134,7 +146,10 @@ export class Qa extends Component {
 					{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
 					<Next className="inline-block" onClick={e => this.handleNext(e)} />
 
-					<div className="answer-feedback inline-block">{this.state.feedback}</div>
+					<div className="answer-feedback inline-block">
+						{this.state.feedback}
+					</div>
+					<div className="correctAnswer">{correction}</div>
 
 					<div className="answer-feedback">
 						Correct Answers: {this.state.correctCount}
@@ -145,7 +160,9 @@ export class Qa extends Component {
 
 		return (
 			<div className="qa-form">
-				<label className="big-bitch-text">What is the word for {display}?</label>
+				<label className="big-bitch-text">
+					What is the word for {display}?
+				</label>
 
 				{/* **THIS is where the INPUT for the answer starts** */}
 
@@ -194,8 +211,13 @@ export class Qa extends Component {
 				</Formik>
 				{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
 				<Next className="inline-block" onClick={e => this.handleNext(e)} />
-				<div className="answer-feedback inline-block">{this.state.feedback}</div>
-				<button className="inline-block" onClick={e => this.progButton(e)}>Show Progress</button>
+				<div className="answer-feedback inline-block">
+					{this.state.feedback}
+				</div>
+				<div className="correctAnswer">{correction}</div>
+				<button className="inline-block" onClick={e => this.progButton(e)}>
+					Show Progress
+				</button>
 			</div>
 		);
 	}
