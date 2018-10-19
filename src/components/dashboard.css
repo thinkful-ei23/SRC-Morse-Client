@@ -2,3 +2,19 @@
 	display: inline-block;
 	padding: 5px;
 }
+.dynamic-width{width: 80%;}
+
+.qa-form{
+justify-content:center;
+width: 30%;
+	height: 20%;
+
+  transform: translate(75%, 50%);
+
+
+	background: url('../images/panel.png');
+	background-size: 100% 100%;
+	flex-direction: column;
+	padding: 5%;
+	text-align: center;
+}

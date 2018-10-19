@@ -132,9 +132,9 @@ export class Qa extends Component {
 						)}
 					</Formik>
 					{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
-					<Next onClick={e => this.handleNext(e)} />
+					<Next className="inline-block" onClick={e => this.handleNext(e)} />
 
-					<div className="answer-feedback">{this.state.feedback}</div>
+					<div className="answer-feedback inline-block">{this.state.feedback}</div>
 
 					<div className="answer-feedback">
 						Correct Answers: {this.state.correctCount}
@@ -193,9 +193,9 @@ export class Qa extends Component {
 					)}
 				</Formik>
 				{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
-				<Next onClick={e => this.handleNext(e)} />
-				<div className="answer-feedback">{this.state.feedback}</div>
-				<button onClick={e => this.progButton(e)}>Show Progress</button>
+				<Next className="inline-block" onClick={e => this.handleNext(e)} />
+				<div className="answer-feedback inline-block">{this.state.feedback}</div>
+				<button className="inline-block" onClick={e => this.progButton(e)}>Show Progress</button>
 			</div>
 		);
 	}
