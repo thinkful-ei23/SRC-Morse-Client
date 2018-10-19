@@ -1,12 +1,11 @@
-export const GET_ANSWER = 'GET_ANSWER';
-export const getAnswer = answer => ({
-	type: GET_ANSWER,
-	answer
+export const CORRECT_ANSWER = 'CORRECT_ANSWER';
+export const correctAnswer = list => ({
+	type: CORRECT_ANSWER,
+	list
 });
 
-export const COMPARE_Q_A = 'COMPARE_Q_A';
-export const compareAnswer = (q, a) => ({
-	type: COMPARE_Q_A,
-	q,
-	a
+export const INCORRECT_ANSWER = 'INCORRECT_ANSWER';
+export const incorrectAnswer = list => ({
+	type: INCORRECT_ANSWER,
+	list
 });

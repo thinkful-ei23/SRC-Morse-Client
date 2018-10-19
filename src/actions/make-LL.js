@@ -53,26 +53,6 @@ class LinkedList {
 
 export const QLL = new LinkedList();
 
-// const array = [
-// 	{
-// 		memoryStrength: 1,
-// 		points: 0,
-// 		question: '...---...',
-// 		answer: 'SOS',
-// 		next: 1
-// 	},
-// 	{ memoryStrength: 1, points: 0, question: '...', answer: 'S', next: 1 },
-// 	{ memoryStrength: 1, points: 0, question: '---', answer: 'O', next: 1 }
-// ];
-
-// function makeList(list = QLL, array) {
-// 	array.map(position => {
-// 		list.insertLast(position);
-// 	});
-// 	console.log(list);
-// 	return list;
-// }
-
 // function Next(list) {
 // 	currNode = list.head;
 // 	nextNode = list.head.next;

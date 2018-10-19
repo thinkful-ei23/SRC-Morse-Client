@@ -1,19 +1,24 @@
-import { GET_ANSWER, COMPARE_Q_A } from '../actions/answers-feedback';
+import { CORRECT_ANSWER, INCORRECT_ANSWER } from '../actions/answers-feedback';
 
 const initialState = {
-	answer: '',
-	correct: false,
-	incorrect: false
+	list: ''
 };
 
 export default function ansReducer(state = initialState, action) {
-	// console.log('reducer log:', action);
-	if (action.type === GET_ANSWER) {
-		return Object.assign({}, state, {
-			answer: action.answer
-		});
+	if (action.type === CORRECT_ANSWER) {
+		console.log('reducer log:', action.list);
+		// console.log(':', action.list.head.value.memoryStrength);
+		let M = action.list.head.value.memoryStrength;
+		let currNode = action.list.head;
+		let nextNode = action.list.head.next;
+		let thirdNode = nextNode.next;
+		M = M * 2;
+		console.log(action.list.head.value);
+		// return Object.assign({}, state, {
+		// 	answer: action.answer
+		// });
 	}
-	if (action.type === COMPARE_Q_A) {
+	if (action.type === INCORRECT_ANSWER) {
 		if (action.q === action.a) {
 			return Object.assign({}, state, {
 				correct: true
