@@ -1,5 +1,6 @@
 import React from 'react';
 import StudyGuide from './study-morse';
+import { Link } from 'react-router-dom';
 
 export default class FAQ extends React.Component {
 	constructor(props) {
@@ -7,6 +8,7 @@ export default class FAQ extends React.Component {
 		this.state = {
 			study: false
 		};
+		this.onClose = this.onClose.bind(this);
 	}
 
 	studyClick(e) {
@@ -15,6 +17,10 @@ export default class FAQ extends React.Component {
 
 	onClick(e) {
 		this.setState({ study: false });
+	}
+
+	onClose(e) {
+		this.props.history.push('/');
 	}
 
 	render() {
@@ -34,7 +40,7 @@ export default class FAQ extends React.Component {
 				<button onClick={e => this.studyClick(e)}>
 					Yes! I want to be a spy!
 				</button>
-				<button onClick={e => this.props.closeClick(e)}>Close</button>
+				<button onClick={e => this.onClose(e)}>Close</button>
 			</div>
 		);
 	}
