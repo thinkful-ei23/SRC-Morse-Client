@@ -4,12 +4,14 @@
 }
 .dynamic-width{width: 80%;}
 
+.answer-input{max-width: -webkit-fill-available;}
+
 .qa-form{
 justify-content:center;
 width: 25%;
 	height: 20%;
 
-  transform: translate(75%, 50%);
+  transform: translate(92%, 50%);
 
 
 	background: url('../images/panel.png');

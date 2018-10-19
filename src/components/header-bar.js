@@ -45,15 +45,19 @@ export class HeaderBar extends React.Component {
 		return (
 			<div className="header-bar">
 				<h1>Morse App</h1>
+				<div className = "header-panel">
+						<div className="dashboard-name">Hello {this.props.name}</div>:
 				{logOutButton}
 				<button onClick={e => this.onClick(e)}>FAQ</button>
+				</div>
 			</div>
 		);
 	}
 }
 
 const mapStateToProps = state => ({
-	loggedIn: state.auth.currentUser !== null
+name: `${currentUser.name}`,
+loggedIn: state.auth.currentUser !== null
 });
 
 export default connect(mapStateToProps)(HeaderBar);
