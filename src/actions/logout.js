@@ -24,10 +24,10 @@ export const save = () => (dispatch, getState) => {
 	const head = getState().auth.currentUser.head;
 	const questions = getState().auth.currentUser.questions;
 	const points = getState().auth.currentUser.points;
-	let newQ = questions.map(obj => JSON.stringify(obj));
-	const currentUser = { questions: newQ, points: points, head: head };
+	// let newQ = questions.map(obj => JSON.stringify(obj));
+	const currentUser = { questions: questions, points: points, head: head };
 
-	console.log('currentuser', head, newQ, points);
+	console.log('currentuser', head, questions, points);
 	return fetch(`${API_BASE_URL}/users/${userId}`, {
 		method: 'PUT',
 		body: JSON.stringify(currentUser),
