@@ -31,7 +31,7 @@ export const save = () => (dispatch, getState) => {
 	return fetch(`${API_BASE_URL}/users/${userId}`, {
 		method: 'PUT',
 		body: JSON.stringify(currentUser),
-		header: {
+		headers: {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${authToken}`
 		}
