@@ -32,7 +32,7 @@ export default function ansReducer(state = initialState, action) {
 			next: null
 		});
 		action.state.splice(-1, 1, finalState);
-		console.log('finalState:', action.state);
+		// console.log('finalState:', action.state);
 		action.state.splice(0, 1, newStart);
 		// console.log(action.state);
 		return Object.assign({}, state, {
