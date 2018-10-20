@@ -3,6 +3,20 @@
 	display: block;
 }
 
-.qa-button{
+.your-name {
+	display: inline-block;
+	font-size: 25px;
+}
+
+.add-margin {
+	margin-bottom: 10px; 
+}
+
+.button-margin {
+	margin-left: 5px;
+}
+
+button {
+	border-radius: 3px;
 	
 }

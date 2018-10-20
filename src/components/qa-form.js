@@ -14,6 +14,8 @@ import Next from './next-button';
 import { correctAnswer, incorrectAnswer } from '../actions/answers-feedback';
 // import DisplayQuestions from './display-question'; // tried to put question in its own component
 import { fetchQuestions } from '../actions/questions';
+import { clearAuth } from '../actions/auth';
+import { clearAuthToken } from '../local-storage';
 
 export class Qa extends Component {
 	constructor(props) {
@@ -33,6 +35,18 @@ export class Qa extends Component {
 
 	progButton(e) {
 		this.setState({ showProg: true });
+	}
+	onClick(e) {
+		console.log('faq clicked');
+		this.setState({
+			faq: true
+		});
+	}
+
+	logOut() {
+		alert('You have successfully logged out.');
+		this.props.dispatch(clearAuth());
+		clearAuthToken();
 	}
 
 	handleNext(e) {
@@ -82,6 +96,10 @@ export class Qa extends Component {
 
 	render() {
 		// **THIS is the RESPONSE from call to mLab**
+		let logOutButton;
+		if (this.props.loggedIn) {
+			logOutButton = <button onClick={() => this.logOut()}>Log out</button>;
+		}
 		let display = '';
 		let correction = '';
 		const questions = this.props.questions;
@@ -98,7 +116,15 @@ export class Qa extends Component {
 
 		if (this.state.showProg === true) {
 			return (
-				<div className="qa-form row">
+				<div className="row">
+					<div className="add-margin">
+						<span className="your-name">Hello {this.props.name}</span>
+						<div className="header-panel">
+							{logOutButton}
+							<button className="button-look button-margin" onClick={e => this.onClick(e)}>FAQ</button>
+						</div>
+					</div>
+				<div className="qa-form">
 					<label>What is the word for {display}?</label>
 					<Formik
 						initialValues={{ answer: '' }}
@@ -155,11 +181,20 @@ export class Qa extends Component {
 						Correct Answers: {this.state.correctCount}
 					</div>
 				</div>
+				</div>
 			);
 		}
 
 		return (
-			<div className="qa-form row">
+			<div className="row" >
+				<div className="add-margin">
+					<span className="your-name">Hello {this.props.name}</span>
+					<div className="header-panel">
+						{logOutButton}
+						<button className="button-margin" onClick={e => this.onClick(e)}>FAQ</button>
+					</div>
+				</div>
+			<div className="qa-form">
 				<label className="big-bitch-text">
 					What is the word for {display}?
 				</label>
@@ -219,6 +254,7 @@ export class Qa extends Component {
 					Show Progress
 				</button>
 			</div>
+			</div>
 		);
 	}
 }
@@ -229,7 +265,9 @@ function mapStateToProps(state) {
 	// console.log('in mapstatetoprops', state);
 	return {
 		questions: state.question.question,
-		list: state.answer.list
+		list: state.answer.list,
+		name: `${state.auth.currentUser.name}`,
+		loggedIn: state.auth.currentUser !== null
 	};
 }
 
