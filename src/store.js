@@ -7,6 +7,7 @@ import protectedDataReducer from './reducers/protected-data';
 import questionReducer from './reducers/questions';
 import { setAuthToken, refreshAuthToken } from './actions/auth';
 import ansReducer from './reducers/answers-feedback';
+import logoutReducer from './reducers/logout';
 
 const composeEnhancers =
 	window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ || compose;
@@ -16,7 +17,8 @@ const store = createStore(
 		auth: authReducer,
 		question: questionReducer,
 		protectedData: protectedDataReducer,
-		answer: ansReducer
+		answer: ansReducer,
+		save: logoutReducer
 	}),
 	composeEnhancers(applyMiddleware(thunk))
 );

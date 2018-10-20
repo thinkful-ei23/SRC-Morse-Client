@@ -16,6 +16,7 @@ import { correctAnswer, incorrectAnswer } from '../actions/answers-feedback';
 import { fetchQuestions } from '../actions/questions';
 import { clearAuth } from '../actions/auth';
 import { clearAuthToken } from '../local-storage';
+import { Redirect } from 'react-router-dom';
 
 export class Qa extends Component {
 	constructor(props) {
@@ -25,12 +26,16 @@ export class Qa extends Component {
 			feedback: '',
 			correctCount: 0,
 			showProg: false,
-			correctAnswer: false
+			correctAnswer: false,
+			faq: false
 		};
 	}
 	componentDidMount() {
 		// console.log('componentdidMount');
 		this.props.dispatch(fetchQuestions());
+		this.setState({
+			faq: false
+		});
 	}
 
 	progButton(e) {
@@ -96,6 +101,9 @@ export class Qa extends Component {
 
 	render() {
 		// **THIS is the RESPONSE from call to mLab**
+		if (this.state.faq) {
+			return <Redirect to="/faq" />;
+		}
 		let logOutButton;
 		if (this.props.loggedIn) {
 			logOutButton = <button onClick={() => this.logOut()}>Log out</button>;
@@ -104,7 +112,7 @@ export class Qa extends Component {
 		let correction = '';
 		const questions = this.props.questions;
 		if (questions) {
-			console.log('question', questions);
+			// console.log('question', questions);
 			display = questions[0].question;
 		}
 		if (!questions) {
