@@ -86,7 +86,7 @@ export class Qa extends Component {
 		let correction = '';
 		const questions = this.props.questions;
 		if (questions) {
-			console.log('question', questions);
+			// console.log('question', questions);
 			display = questions[0].question;
 		}
 		if (!questions) {

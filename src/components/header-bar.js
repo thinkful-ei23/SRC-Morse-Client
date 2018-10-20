@@ -29,10 +29,14 @@ export class HeaderBar extends React.Component {
 	}
 
 	logOut() {
-		this.props.dispatch(save());
-		// alert('You have successfully logged out.');
-		// this.props.dispatch(clearAuth());
-		// clearAuthToken();
+		this.props.dispatch(save()).then(() => {
+			if (this.props.success) {
+				console.log('success!');
+				// alert('You have successfully logged out.');
+				this.props.dispatch(clearAuth());
+				clearAuthToken();
+			}
+		});
 	}
 
 	render() {
@@ -55,7 +59,8 @@ export class HeaderBar extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	loggedIn: state.auth.currentUser !== null
+	loggedIn: state.auth.currentUser !== null,
+	success: state.save.success
 });
 
 export default connect(mapStateToProps)(HeaderBar);

@@ -2,7 +2,8 @@ import { SAVE_REQUEST, SAVE_ERROR, SAVE_SUCCESS } from '../actions/logout';
 
 const initialState = {
 	saving: false,
-	error: null
+	error: null,
+	success: false
 };
 
 export default function logoutReducer(state = initialState, action) {
@@ -18,7 +19,9 @@ export default function logoutReducer(state = initialState, action) {
 		});
 	}
 	if (action.type === SAVE_SUCCESS) {
+		// console.log(state);
 		return Object.assign({}, state, {
+			success: true,
 			saving: false,
 			error: null
 		});
