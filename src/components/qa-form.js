@@ -56,7 +56,7 @@ export class Qa extends Component {
 			console.log('correct');
 			this.setState({
 				feedback:
-					"Yay! Keep at it! You'll be a spy in no time! Total Progress: ",
+					"Yay! Keep at it! You'll be a spy in no time! ",
 				correctCount: this.state.correctCount + 1
 			});
 			this.props.dispatch(correctAnswer(this.props.questions));
@@ -98,7 +98,7 @@ export class Qa extends Component {
 
 		if (this.state.showProg === true) {
 			return (
-				<div className="qa-form">
+				<div className="qa-form row">
 					<label>What is the word for {display}?</label>
 					<Formik
 						initialValues={{ answer: '' }}
@@ -159,7 +159,7 @@ export class Qa extends Component {
 		}
 
 		return (
-			<div className="qa-form">
+			<div className="qa-form row">
 				<label className="big-bitch-text">
 					What is the word for {display}?
 				</label>

@@ -12,7 +12,6 @@ export class Dashboard extends React.Component {
 		return (
 			<div className="dashboard">
 				<HeaderBar />
-				<div className="dashboard-name">Hello {this.props.name}</div>
 				<Qa />
 				{/* <History /> future feature */}
 			</div>
