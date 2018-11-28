@@ -9,7 +9,10 @@
 }
 
 .add-margin {
-	margin-bottom: 10px; 
+	margin-bottom: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 .button-margin {
@@ -25,4 +28,16 @@ button {
 	padding: 45px;
 	background: url(/static/media/panel.4cc6d2e8.png);
 	background-size: 100% 100%;
+}
+
+@media only screen and (max-width: 375px) {
+	.log-button {
+		margin-left: 40px;
+	}
+	.header-panel {
+		padding: 0;
+	}
+	.input-qa {
+		width: 205px;
+	}
 }

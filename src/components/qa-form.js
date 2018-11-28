@@ -106,7 +106,7 @@ export class Qa extends Component {
 		}
 		let logOutButton;
 		if (this.props.loggedIn) {
-			logOutButton = <button onClick={() => this.logOut()}>Log out</button>;
+			logOutButton = <button className="log-button" onClick={() => this.logOut()}>Log out</button>;
 		}
 		let display = '';
 		let correction = '';
@@ -238,7 +238,8 @@ export class Qa extends Component {
 						/* and other goodies */
 					}) => (
 						<form onSubmit={handleSubmit}>
-							<input
+							<input 
+								className="input-qa"
 								type="answer"
 								name="answer"
 								onChange={handleChange}
