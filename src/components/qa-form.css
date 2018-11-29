@@ -41,3 +41,7 @@ button {
 		width: 205px;
 	}
 }
+
+.submit-input {
+	margin: 10px 0;
+}

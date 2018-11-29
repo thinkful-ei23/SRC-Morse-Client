@@ -247,7 +247,7 @@ export class Qa extends Component {
 								value={values.answer || ''}
 							/>
 							{errors.answer && touched.answer && errors.answer}
-							<button type="submit" disabled={isSubmitting}>
+							<button className="submit-input" type="submit" disabled={isSubmitting}>
 								Submit Answer
 							</button>
 						</form>
