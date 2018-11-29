@@ -1,6 +1,8 @@
 # LEARN MORSE CODE
 
 [DEMO] (https://morse-learning-app.herokuapp.com/)
+Username: Demo
+password: password123
 
 ## Summary
 Learn Morse code is a app that lets you learn morse code using a algorithm called spaced repetition. You may be wondering why the heck would I want to learn morse code and to that I say I dont know but knowledge is power. Who doesnt want that??
