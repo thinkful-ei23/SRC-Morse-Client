@@ -25,6 +25,14 @@ export function LandingPage(props) {
 					What's morse code? It's a secret.
 					<br />
 					You'll have to <Link to="/register">Register </Link> to find out.
+					<br />
+					To try out your spy-ness, try the demo account
+					<br />
+					<b>Username:</b> useruseruser
+					<br />
+					<b>Password:</b> password123
+					<br />
+					Shhhhh! Don't tell anyone, ok?
 				</p>
 			</div>
 		</div>
