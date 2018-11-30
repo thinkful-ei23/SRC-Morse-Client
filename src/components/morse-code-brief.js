@@ -1,6 +1,8 @@
 import React from 'react';
 import StudyGuide from './study-morse';
 import { Link } from 'react-router-dom';
+import HeaderBar from './header-bar';
+
 
 export default class FAQ extends React.Component {
 	constructor(props) {
@@ -28,7 +30,8 @@ export default class FAQ extends React.Component {
 			return <StudyGuide onClick={e => this.onClick(e)} />;
 		}
 		return (
-			<React.Fragment>
+		<HeaderBar />		
+		<React.Fragment>
 			<h2 className="header-bar">What is Morse Code?</h2>
 			<div className="FAQ row">
 				<div className="faq-align" >

@@ -1,9 +1,12 @@
 import React from 'react';
 import Morse from '../images/morse.png';
+import HeaderBar from './header-bar';
+
 
 export default function StudyGuide(props) {
 	return (
-		<div className="study-guide">
+	<HeaderBar />
+<div className="study-guide">
 			<button onClick={e => props.onClick(e)}>Close</button>
 			<img
 				src={Morse}
