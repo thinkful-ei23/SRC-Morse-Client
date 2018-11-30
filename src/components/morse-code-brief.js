@@ -28,8 +28,10 @@ export default class FAQ extends React.Component {
 			return <StudyGuide onClick={e => this.onClick(e)} />;
 		}
 		return (
-			<div className="FAQ">
-				<h2>What is Morse Code?</h2>
+			<React.Fragment>
+			<h2 className="header-bar">What is Morse Code?</h2>
+			<div className="FAQ row">
+				<div className="faq-align" >
 				<p>
 					Morse Code is "an alphabet or code in which letters are represented by
 					combinations of long and short light or sound signals."
@@ -41,7 +43,9 @@ export default class FAQ extends React.Component {
 					Yes! I want to be a spy!
 				</button>
 				<button onClick={e => this.onClose(e)}>Close</button>
+				</div>
 			</div>
+			</React.Fragment>
 		);
 	}
 }

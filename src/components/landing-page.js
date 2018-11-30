@@ -19,7 +19,7 @@ export function LandingPage(props) {
 				<LoginForm />
 			</div>
 			<div className="intro">
-				<h3>Do you wanna be a spy? Well, do ya, PUNK?</h3>
+				<h3>Learn Morse code with your friends!</h3>
 				<p>
 					Here's the thing. Spies ALL know morse code. <br />
 					What's morse code? It's a secret.

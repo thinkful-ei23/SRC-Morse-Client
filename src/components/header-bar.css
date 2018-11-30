@@ -5,19 +5,19 @@
 	background-size: 100% 100%;
 }
 
-h1{text-align: center;}
+h1{
+	text-align: center;
+}
 
 .header-panel{
-justify-content:right;
-width: 10%;
-	height: 20%;
+	display: inline-block;
+	position: relative;
+	
+}
 
-  transform: translate(365%, 10%);
-
-
-	background: url('../images/panel.png');
-	background-size: 100% 100%;
-	flex-direction: column;
-	padding: 1%;
-	text-align: center;
+@media only screen and (min-width: 480px)
+{
+	.header-panel {
+		padding-left: 235px;
+	}
 }

@@ -3,6 +3,45 @@
 	display: block;
 }
 
-.qa-button{
-	
+.your-name {
+	display: inline-block;
+	font-size: 25px;
+}
+
+.add-margin {
+	margin-bottom: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.button-margin {
+	margin-left: 5px;
+}
+
+button {
+	border-radius: 3px;
+	font-size: 16px;
+}
+
+.faq-align {
+	padding: 45px;
+	background: url(/static/media/panel.4cc6d2e8.png);
+	background-size: 100% 100%;
+}
+
+@media only screen and (max-width: 375px) {
+	.log-button {
+		margin-left: 40px;
+	}
+	.header-panel {
+		padding: 0;
+	}
+	.input-qa {
+		width: 205px;
+	}
+}
+
+.submit-input {
+	margin: 10px 0;
 }
