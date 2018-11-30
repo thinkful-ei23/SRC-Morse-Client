@@ -30,6 +30,7 @@ export default class FAQ extends React.Component {
 			return <StudyGuide onClick={e => this.onClick(e)} />;
 		}
 		return (
+		<div>
 		<HeaderBar />		
 		<React.Fragment>
 			<h2 className="header-bar">What is Morse Code?</h2>
@@ -49,6 +50,7 @@ export default class FAQ extends React.Component {
 				</div>
 			</div>
 			</React.Fragment>
+			</div>
 		);
 	}
 }
