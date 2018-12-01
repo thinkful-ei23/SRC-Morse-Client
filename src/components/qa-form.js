@@ -1,15 +1,7 @@
-/*TO-DO:
-	CHECK IMPORTS
-	ACTIONS
-	SET UP ELEMENTS (TEMPLATE)
-	-CSS formatting	
-*/
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Formik } from 'formik';
 //import { addRack } from '../actions/protected-data';
-import './qa-form.css';
+import './css/qa-form.css';
 import Next from './next-button';
 import { correctAnswer, incorrectAnswer } from '../actions/answers-feedback';
 // import DisplayQuestions from './display-question'; // tried to put question in its own component
@@ -17,6 +9,7 @@ import { fetchQuestions } from '../actions/questions';
 import { clearAuth } from '../actions/auth';
 import { clearAuthToken } from '../local-storage';
 import { Redirect } from 'react-router-dom';
+import AnswerInput from './answer-input';
 
 export class Qa extends Component {
 	constructor(props) {
@@ -74,8 +67,7 @@ export class Qa extends Component {
 		) {
 			console.log('correct');
 			this.setState({
-				feedback:
-					"Yay! Keep at it! You'll be a spy in no time! ",
+				feedback: "Yay! Keep at it! You'll be a spy in no time! ",
 				correctCount: this.state.correctCount + 1
 			});
 			this.props.dispatch(correctAnswer(this.props.questions));
@@ -106,7 +98,11 @@ export class Qa extends Component {
 		}
 		let logOutButton;
 		if (this.props.loggedIn) {
-			logOutButton = <button className="log-button" onClick={() => this.logOut()}>Log out</button>;
+			logOutButton = (
+				<button className="log-button" onClick={() => this.logOut()}>
+					Log out
+				</button>
+			);
 		}
 		let display = '';
 		let correction = '';
@@ -129,140 +125,61 @@ export class Qa extends Component {
 						<span className="your-name">Hello {this.props.name}</span>
 						<div className="header-panel">
 							{logOutButton}
-							<button className="button-look button-margin" onClick={e => this.onClick(e)}>FAQ</button>
+							<button
+								className="button-look button-margin"
+								onClick={e => this.onClick(e)}
+							>
+								FAQ
+							</button>
 						</div>
 					</div>
-				<div className="qa-form">
-					<label>What is the word for {display}?</label>
-					<Formik
-						initialValues={{ answer: '' }}
-						validate={values => {
-							let errors = {};
-							if (!values.answer) {
-								errors.answer = 'Required';
-							}
-							return errors;
-						}}
-						onSubmit={(values, { setSubmitting, resetForm }) => {
-							setTimeout(() => {
-								this.handleSubmit(values);
-								setSubmitting(false);
-								resetForm();
-							}, 10);
-						}}
-					>
-						{({
-							values,
-							errors,
-							touched,
-							handleChange,
-							handleBlur,
-							handleSubmit,
-							isSubmitting,
-							resetForm
-							/* and other goodies */
-						}) => (
-							<form onSubmit={handleSubmit}>
-								<input
-									type="answer"
-									name="answer"
-									onChange={handleChange}
-									onBlur={handleBlur}
-									value={values.answer || ''}
-								/>
-								{errors.answer && touched.answer && errors.answer}
-								<button type="submit" disabled={isSubmitting}>
-									Submit Answer
-								</button>
-							</form>
-						)}
-					</Formik>
-					{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
-					<Next className="inline-block" onClick={e => this.handleNext(e)} />
+					<div className="qa-form">
+						<label>What is the word for {display}?</label>
+						<AnswerInput />
+						{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
+						<Next className="inline-block" onClick={e => this.handleNext(e)} />
 
-					<div className="answer-feedback inline-block">
-						{this.state.feedback}
-					</div>
-					<div className="correctAnswer">{correction}</div>
+						<div className="answer-feedback inline-block">
+							{this.state.feedback}
+						</div>
+						<div className="correctAnswer">{correction}</div>
 
-					<div className="answer-feedback">
-						Correct Answers: {this.state.correctCount}
+						<div className="answer-feedback">
+							Correct Answers: {this.state.correctCount}
+						</div>
 					</div>
-				</div>
 				</div>
 			);
 		}
 
 		return (
-			<div className="row" >
+			<div className="row">
 				<div className="add-margin">
 					<span className="your-name">Hello {this.props.name}</span>
 					<div className="header-panel">
 						{logOutButton}
-						<button className="button-margin" onClick={e => this.onClick(e)}>FAQ</button>
+						<button className="button-margin" onClick={e => this.onClick(e)}>
+							FAQ
+						</button>
 					</div>
 				</div>
-			<div className="qa-form">
-				<label className="big-bitch-text">
-					What is the word for {display}?
-				</label>
+				<div className="qa-form">
+					<label className="big-bitch-text">
+						What is the word for {display}?
+					</label>
 
-				{/* **THIS is where the INPUT for the answer starts** */}
-
-				<Formik
-					initialValues={{ answer: '' }}
-					validate={values => {
-						let errors = {};
-						if (!values.answer) {
-							errors.answer = 'Required';
-						}
-						return errors;
-					}}
-					onSubmit={(values, { setSubmitting, resetForm }) => {
-						setTimeout(() => {
-							this.handleSubmit(values);
-							setSubmitting(false);
-							resetForm();
-						}, 10);
-					}}
-				>
-					{({
-						values,
-						errors,
-						touched,
-						handleChange,
-						handleBlur,
-						handleSubmit,
-						isSubmitting,
-						resetForm
-						/* and other goodies */
-					}) => (
-						<form onSubmit={handleSubmit}>
-							<input 
-								className="input-qa"
-								type="answer"
-								name="answer"
-								onChange={handleChange}
-								onBlur={handleBlur}
-								value={values.answer || ''}
-							/>
-							{errors.answer && touched.answer && errors.answer}
-							<button className="submit-input" type="submit" disabled={isSubmitting}>
-								Submit Answer
-							</button>
-						</form>
-					)}
-				</Formik>
-				{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
-				<Next className="inline-block" onClick={e => this.handleNext(e)} />
-				<div className="answer-feedback inline-block">
-					{this.state.feedback}
+					{/* **THIS is where the INPUT for the answer starts** */}
+					<AnswerInput />
+					{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
+					<Next className="inline-block" onClick={e => this.handleNext(e)} />
+					<div className="answer-feedback inline-block">
+						{this.state.feedback}
+					</div>
+					<div className="correctAnswer">{correction}</div>
+					<button className="inline-block" onClick={e => this.progButton(e)}>
+						Show Progress
+					</button>
 				</div>
-				<div className="correctAnswer">{correction}</div>
-				<button className="inline-block" onClick={e => this.progButton(e)}>
-					Show Progress
-				</button>
-			</div>
 			</div>
 		);
 	}

@@ -1,0 +1,14 @@
+body {
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
+	display: grid;
+	background-image: url('morse-bg.jpg');
+	background-size: cover;
+	/* grid-template: 100% / 100%; */
+	/* font-size: 2vmin; */
+	background-color: #fcfcfc;
+	/* background-size: cover; */
+	background-repeat: no-repeat;
+}

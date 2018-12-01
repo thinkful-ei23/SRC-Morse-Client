@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, withRouter } from 'react-router-dom';
+import { refreshAuthToken } from '../actions/auth';
 
-import LandingPage from './landing-page';
 import Dashboard from './dashboard';
 import RegistrationPage from './registration-page';
-import { refreshAuthToken } from '../actions/auth';
+import LandingPage from './landing-page';
 import FAQ from './morse-code-brief';
+
+import './css/app.css'
 
 export class App extends React.Component {
 	componentDidUpdate(prevProps) {
