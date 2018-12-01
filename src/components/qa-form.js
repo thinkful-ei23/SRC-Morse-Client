@@ -19,26 +19,16 @@ export class Qa extends Component {
 			feedback: '',
 			correctCount: 0,
 			showProg: false,
-			correctAnswer: false,
-			faq: false
+			correctAnswer: false
 		};
 	}
 	componentDidMount() {
 		// console.log('componentdidMount');
 		this.props.dispatch(fetchQuestions());
-		this.setState({
-			faq: false
-		});
 	}
 
 	progButton(e) {
 		this.setState({ showProg: true });
-	}
-	onClick(e) {
-		console.log('faq clicked');
-		this.setState({
-			faq: true
-		});
 	}
 
 	logOut() {
@@ -93,9 +83,6 @@ export class Qa extends Component {
 
 	render() {
 		// **THIS is the RESPONSE from call to mLab**
-		if (this.state.faq) {
-			return <Redirect to="/faq" />;
-		}
 		let logOutButton;
 		if (this.props.loggedIn) {
 			logOutButton = (
@@ -123,15 +110,7 @@ export class Qa extends Component {
 				<div className="row">
 					<div className="add-margin">
 						<span className="your-name">Hello {this.props.name}</span>
-						<div className="header-panel">
-							{logOutButton}
-							<button
-								className="button-look button-margin"
-								onClick={e => this.onClick(e)}
-							>
-								FAQ
-							</button>
-						</div>
+						<div className="header-panel">{logOutButton}</div>
 					</div>
 					<div className="qa-form">
 						<label>What is the word for {display}?</label>
@@ -156,12 +135,7 @@ export class Qa extends Component {
 			<div className="row">
 				<div className="add-margin">
 					<span className="your-name">Hello {this.props.name}</span>
-					<div className="header-panel">
-						{logOutButton}
-						<button className="button-margin" onClick={e => this.onClick(e)}>
-							FAQ
-						</button>
-					</div>
+					<div className="header-panel">{logOutButton}</div>
 				</div>
 				<div className="qa-form">
 					<label className="big-bitch-text">

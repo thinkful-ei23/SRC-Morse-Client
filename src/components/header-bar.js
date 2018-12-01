@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import './css/header-bar.css';
 
@@ -14,7 +15,9 @@ export class HeaderBar extends React.Component {
 							<button>My Progress</button>
 						</li>
 						<li>
-							<button>FAQ</button>
+							<Link to="/faq">
+								<button>FAQ</button>
+							</Link>
 						</li>
 						<li>
 							<button>Log Out</button>
