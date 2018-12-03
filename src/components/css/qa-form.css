@@ -25,6 +25,10 @@ button {
 	margin: 10px 0 0 0;
 }
 
+label.big-bitch-text {
+	font-size: 12px;
+}
+
 .faq-align {
 	padding: 45px;
 	background: url(/static/media/panel.4cc6d2e8.png);
