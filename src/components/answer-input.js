@@ -14,7 +14,7 @@ export default function AnswerInput(props) {
 			}}
 			onSubmit={(values, { setSubmitting, resetForm }) => {
 				setTimeout(() => {
-					this.handleSubmit(values);
+					props.handleSubmit(values);
 					setSubmitting(false);
 					resetForm();
 				}, 10);
@@ -26,12 +26,11 @@ export default function AnswerInput(props) {
 				touched,
 				handleChange,
 				handleBlur,
-				handleSubmit,
 				isSubmitting,
 				resetForm
 				/* and other goodies */
 			}) => (
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={values => props.handleSubmit(values)}>
 					<input
 						type="answer"
 						name="answer"

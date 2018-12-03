@@ -1,15 +1,22 @@
+/*TO-DO:
+	CHECK IMPORTS
+	ACTIONS
+	SET UP ELEMENTS (TEMPLATE)
+	-CSS formatting	
+*/
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Formik } from 'formik';
 //import { addRack } from '../actions/protected-data';
 import './css/qa-form.css';
 import Next from './next-button';
 import { correctAnswer, incorrectAnswer } from '../actions/answers-feedback';
 // import DisplayQuestions from './display-question'; // tried to put question in its own component
 import { fetchQuestions } from '../actions/questions';
-import { clearAuth } from '../actions/auth';
-import { clearAuthToken } from '../local-storage';
+// import { clearAuth } from '../actions/auth';
+// import { clearAuthToken } from '../local-storage';
 import { Redirect } from 'react-router-dom';
-import AnswerInput from './answer-input';
 
 export class Qa extends Component {
 	constructor(props) {
@@ -25,17 +32,26 @@ export class Qa extends Component {
 	componentDidMount() {
 		// console.log('componentdidMount');
 		this.props.dispatch(fetchQuestions());
+		this.setState({
+			faq: false
+		});
 	}
 
 	progButton(e) {
 		this.setState({ showProg: true });
 	}
-
-	logOut() {
-		alert('You have successfully logged out.');
-		this.props.dispatch(clearAuth());
-		clearAuthToken();
+	onClick(e) {
+		console.log('faq clicked');
+		this.setState({
+			faq: true
+		});
 	}
+
+	// logOut() {
+	// 	alert('You have successfully logged out.');
+	// 	this.props.dispatch(clearAuth());
+	// 	clearAuthToken();
+	// }
 
 	handleNext(e) {
 		console.log('Next');
@@ -43,14 +59,6 @@ export class Qa extends Component {
 	}
 
 	handleSubmit(values) {
-		/* --this would put the input into the State to be passed to child component: Answer Feedback
-			-- This does not work yet, try again later
-		this.setState({
-		 	answer: values.answer
-		 });
-			*/
-		// console.log(values.answer);
-		// console.log( answer.head.value.answer);
 		if (
 			values.answer.toLowerCase() ===
 			this.props.questions[0].answer.toLowerCase()
@@ -83,14 +91,17 @@ export class Qa extends Component {
 
 	render() {
 		// **THIS is the RESPONSE from call to mLab**
-		let logOutButton;
-		if (this.props.loggedIn) {
-			logOutButton = (
-				<button className="log-button" onClick={() => this.logOut()}>
-					Log out
-				</button>
-			);
+		if (this.state.faq) {
+			return <Redirect to="/faq" />;
 		}
+		let logOutButton;
+		// if (this.props.loggedIn) {
+		// 	logOutButton = (
+		// 		<button className="log-button" onClick={() => this.logOut()}>
+		// 			Log out
+		// 		</button>
+		// 	);
+		// }
 		let display = '';
 		let correction = '';
 		const questions = this.props.questions;
@@ -114,7 +125,49 @@ export class Qa extends Component {
 					</div>
 					<div className="qa-form">
 						<label>What is the word for {display}?</label>
-						<AnswerInput />
+						<Formik
+							initialValues={{ answer: '' }}
+							validate={values => {
+								let errors = {};
+								if (!values.answer) {
+									errors.answer = 'Required';
+								}
+								return errors;
+							}}
+							onSubmit={(values, { setSubmitting, resetForm }) => {
+								setTimeout(() => {
+									this.handleSubmit(values);
+									setSubmitting(false);
+									resetForm();
+								}, 10);
+							}}
+						>
+							{({
+								values,
+								errors,
+								touched,
+								handleChange,
+								handleBlur,
+								handleSubmit,
+								isSubmitting,
+								resetForm
+								/* and other goodies */
+							}) => (
+								<form onSubmit={handleSubmit}>
+									<input
+										type="answer"
+										name="answer"
+										onChange={handleChange}
+										onBlur={handleBlur}
+										value={values.answer || ''}
+									/>
+									{errors.answer && touched.answer && errors.answer}
+									<button type="submit" disabled={isSubmitting}>
+										Submit Answer
+									</button>
+								</form>
+							)}
+						</Formik>
 						{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
 						<Next className="inline-block" onClick={e => this.handleNext(e)} />
 
@@ -143,7 +196,55 @@ export class Qa extends Component {
 					</label>
 
 					{/* **THIS is where the INPUT for the answer starts** */}
-					<AnswerInput />
+
+					<Formik
+						initialValues={{ answer: '' }}
+						validate={values => {
+							let errors = {};
+							if (!values.answer) {
+								errors.answer = 'Required';
+							}
+							return errors;
+						}}
+						onSubmit={(values, { setSubmitting, resetForm }) => {
+							setTimeout(() => {
+								this.handleSubmit(values);
+								setSubmitting(false);
+								resetForm();
+							}, 10);
+						}}
+					>
+						{({
+							values,
+							errors,
+							touched,
+							handleChange,
+							handleBlur,
+							handleSubmit,
+							isSubmitting,
+							resetForm
+							/* and other goodies */
+						}) => (
+							<form onSubmit={handleSubmit}>
+								<input
+									className="input-qa"
+									type="answer"
+									name="answer"
+									onChange={handleChange}
+									onBlur={handleBlur}
+									value={values.answer || ''}
+								/>
+								{errors.answer && touched.answer && errors.answer}
+								<button
+									className="submit-input"
+									type="submit"
+									disabled={isSubmitting}
+								>
+									Submit Answer
+								</button>
+							</form>
+						)}
+					</Formik>
 					{/* <Answers answer={this.state.answer} />  --This was a try at refactoring out the Answer Feedback but I couldn't get it to recognize certain props from here.*/}
 					<Next className="inline-block" onClick={e => this.handleNext(e)} />
 					<div className="answer-feedback inline-block">

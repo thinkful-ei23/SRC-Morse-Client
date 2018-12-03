@@ -1,10 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { clearAuth } from '../actions/auth';
+import { clearAuthToken } from '../local-storage';
 
 import './css/header-bar.css';
 
 export class HeaderBar extends React.Component {
+	logOut() {
+		alert('You have successfully logged out.');
+		this.props.dispatch(clearAuth());
+		clearAuthToken();
+	}
+
 	render() {
 		return (
 			<div className="header-bar">
@@ -20,7 +28,7 @@ export class HeaderBar extends React.Component {
 							</Link>
 						</li>
 						<li>
-							<button>Log Out</button>
+							<button onClick={e => this.logOut(e)}>Log Out</button>
 						</li>
 					</ul>
 				</div>
