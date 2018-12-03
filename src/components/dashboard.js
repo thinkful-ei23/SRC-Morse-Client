@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import Qa from './qa-form';
-import History from './history';
+// import History from './history';
 import HeaderBar from './header-bar';
 
-import './dashboard.css';
+import './css/dashboard.css';
 
 export class Dashboard extends React.Component {
 	render() {
