@@ -19,6 +19,16 @@
 	/* background-size: 100% 100%; */
 }
 
+.qa-form button.inline-block {
+	margin: 10px 0;
+	padding: 3px 10px;
+}
+
+button.submit-input {
+	margin: 0 13px;
+	font-size: 14px;
+}
+
 .row {
 	max-width: 480px;
 	margin: 100px auto;
