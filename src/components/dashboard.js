@@ -2,18 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import Qa from './qa-form';
-// import History from './history';
 import HeaderBar from './header-bar';
+import { Redirect } from 'react-router-dom';
 
 import './css/dashboard.css';
 
 export class Dashboard extends React.Component {
 	render() {
+		if (!this.props.username) {
+			return <Redirect to="/" />;
+		}
 		return (
 			<div className="dashboard">
 				<HeaderBar />
 				<Qa />
-				{/* <History /> future feature */}
 			</div>
 		);
 	}

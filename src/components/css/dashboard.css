@@ -1,32 +1,38 @@
-/* * {
-	box-sizing: border-box;
-} */
-.inline-block {
-	display: inline-block;
-	padding: 5px;
-}
 .dynamic-width {
 	width: 80%;
 }
 
-.answer-input {
-	max-width: -webkit-fill-available;
-}
-
 .qa-form {
-	padding: 45px 0px 45px 45px;
+	margin: 0;
+	padding: 37px;
+	width: auto;
 	background-color: rgba(225, 225, 225, 0.5);
-	/* background-size: 100% 100%; */
 }
 
-.qa-form button.inline-block {
+.qa-form form {
+	margin: 0 auto;
+	padding: 0;
+	width: 403px;
+}
+
+/* .qa-form button.inline-block {
 	margin: 10px 0;
 	padding: 3px 10px;
-}
+} */
 
 button.submit-input {
 	margin: 0 13px;
+	padding: 3px 7px;
 	font-size: 14px;
+}
+
+.answer-input {
+	font-size: 15px;
+	margin: 0;
+	padding: 2px 6px;
+	width: 250px;
+	height: 20px;
+	border: none;
 }
 
 .row {

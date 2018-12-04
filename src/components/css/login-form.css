@@ -1,9 +1,10 @@
-.center{justify-content: center;
+.center {
+	justify-content: center;
 	text-align: center;
 }
 
-.button-login{
-	margin:10px 15px 0 0;
+.button-login {
+	margin: 10px 0 0 0;
 	border-radius: 3px;
 	min-width: 100px;
 	font-size: 17px;

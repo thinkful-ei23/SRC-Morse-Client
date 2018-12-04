@@ -26,6 +26,9 @@ button {
 }
 
 label.big-bitch-text {
+	padding: 2px;
+	margin: auto;
+	text-align: center;
 	font-size: 16px;
 }
 

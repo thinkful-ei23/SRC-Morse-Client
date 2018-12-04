@@ -32,6 +32,7 @@ export default function AnswerInput(props) {
 			}) => (
 				<form onSubmit={handleSubmit}>
 					<input
+						className="answer-input"
 						type="answer"
 						name="answer"
 						onChange={handleChange}
@@ -39,7 +40,11 @@ export default function AnswerInput(props) {
 						value={values.answer || ''}
 					/>
 					{errors.answer && touched.answer && errors.answer}
-					<button type="submit" disabled={isSubmitting}>
+					<button
+						className="submit-input"
+						type="submit"
+						disabled={isSubmitting}
+					>
 						Submit Answer
 					</button>
 				</form>
