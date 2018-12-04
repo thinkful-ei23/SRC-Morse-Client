@@ -98,56 +98,7 @@ export class Qa extends Component {
 					<label className="big-bitch-text">
 						What is the word for {display}?
 					</label>
-					{/* **THIS is where the INPUT for the answer starts** */}
-					<Formik
-						initialValues={{ answer: '' }}
-						validate={values => {
-							let errors = {};
-							if (!values.answer) {
-								errors.answer = 'Required';
-							}
-							return errors;
-						}}
-						onSubmit={(values, { setSubmitting, resetForm }) => {
-							setTimeout(() => {
-								this.handleSubmit(values);
-								setSubmitting(false);
-								resetForm();
-							}, 10);
-						}}
-					>
-						{({
-							values,
-							errors,
-							touched,
-							handleChange,
-							handleBlur,
-							handleSubmit,
-							isSubmitting,
-							resetForm
-							/* and other goodies */
-						}) => (
-							<form onSubmit={handleSubmit}>
-								<input
-									className="input-qa"
-									type="answer"
-									name="answer"
-									onChange={handleChange}
-									onBlur={handleBlur}
-									value={values.answer || ''}
-								/>
-								{errors.answer && touched.answer && errors.answer}
-								<button
-									className="submit-input"
-									type="submit"
-									disabled={isSubmitting}
-								>
-									Submit Answer
-								</button>
-							</form>
-						)}
-					</Formik>
-					{/* <AnswerInput /> */}
+					<AnswerInput handleSubmit={values => this.handleSubmit(values)} />
 					<Next className="inline-block" onClick={e => this.handleNext(e)} />
 					<div className="answer-feedback inline-block">
 						{this.state.feedback}

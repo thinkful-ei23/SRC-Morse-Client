@@ -26,10 +26,11 @@ export default function AnswerInput(props) {
 				touched,
 				handleChange,
 				handleBlur,
+				handleSubmit,
 				isSubmitting
 				/* and other goodies */
 			}) => (
-				<form onSubmit={values => props.handleSubmit(values)}>
+				<form onSubmit={handleSubmit}>
 					<input
 						type="answer"
 						name="answer"
