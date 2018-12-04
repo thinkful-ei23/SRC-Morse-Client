@@ -23,7 +23,7 @@ export default class FAQ extends React.Component {
 	}
 
 	render() {
-		if (this.state.study == true) {
+		if (this.state.study === true) {
 			return <StudyGuide onClick={e => this.onClick(e)} />;
 		}
 		return (

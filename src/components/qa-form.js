@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Formik } from 'formik';
-import './css/qa-form.css';
 import Next from './next-button';
 import { correctAnswer, incorrectAnswer } from '../actions/answers-feedback';
 import { fetchQuestions } from '../actions/questions';
-import { Redirect } from 'react-router-dom';
 import AnswerInput from './answer-input';
 
+import './css/qa-form.css';
 export class Qa extends Component {
 	constructor(props) {
 		super(props);

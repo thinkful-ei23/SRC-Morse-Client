@@ -50,7 +50,7 @@ export default function ansReducer(state = initialState, action) {
 		action.state.splice(2, 0, newState);
 		// console.log(action.state);
 		action.state.map(obj => (obj.next = action.state.indexOf(obj) + 1));
-		let newStart = Object.assign({}, action.state[0], {
+		Object.assign({}, action.state[0], {
 			next: 1
 		});
 		let finalState = Object.assign({}, action.state[action.state.length - 1], {

@@ -1,5 +1,3 @@
-'use strict';
-
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
 import { QLL } from './make-LL';
@@ -15,9 +13,10 @@ export const fetchQuestionsSuccess = (list, question) => ({
 });
 
 export const FETCH_QUESTIONS_ERROR = 'FETCH_QUESTIONS_ERROR';
-export const fetchQuestionsError = error => (
-	{ type: FETCH_QUESTIONS_ERROR }, error
-);
+export const fetchQuestionsError = error => ({
+	type: FETCH_QUESTIONS_ERROR,
+	error
+});
 
 export const fetchQuestions = () => (dispatch, getState) => {
 	dispatch(fetchQuestionsRequest());

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
 import LoginForm from './login-form';
-import history from './history';
 import './css/landing-page.css';
 
 export function LandingPage(props) {
