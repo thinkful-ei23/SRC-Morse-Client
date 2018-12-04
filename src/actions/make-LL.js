@@ -1,5 +1,3 @@
-import React from 'react';
-
 class _Node {
 	constructor(value, next) {
 		this.value = value;

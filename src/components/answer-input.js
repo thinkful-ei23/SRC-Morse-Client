@@ -26,8 +26,7 @@ export default function AnswerInput(props) {
 				touched,
 				handleChange,
 				handleBlur,
-				isSubmitting,
-				resetForm
+				isSubmitting
 				/* and other goodies */
 			}) => (
 				<form onSubmit={values => props.handleSubmit(values)}>
